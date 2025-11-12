@@ -9,16 +9,22 @@
 :root {
   --color-black: #000;
   --color-white: #fff;
+  --color-dark: #2c2c2c;
+  --color-smooth-white: #e0e0e0;
 }
 
 [data-theme="light"] {
   --bg-color: var(--color-white);
   --text-color: var(--color-black);
+  --button-color: var(--color-dark);
+  --button-text: var(--color-white);
 }
 
 [data-theme="dark"] {
-  --bg-color: var(--color-black);
-  --text-color: var(--color-white);
+  --bg-color: #18181a;
+  --text-color: var(--color-smooth-white);
+  --button-color: var(--color-smooth-white);
+  --button-text: var(--color-black);
 }
 
 #root,

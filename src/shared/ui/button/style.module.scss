@@ -1,0 +1,14 @@
+.customButton {
+  background-color: var(--button-color);
+  color: var(--button-text);
+  padding: 10px 25px;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid #424242;
+  border-radius: 8px;
+  transition: 0.3s;
+
+  &:hover {
+    filter: brightness(125%);
+  }
+}

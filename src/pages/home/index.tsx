@@ -1,8 +1,12 @@
+import { Faq, GetStarted, Info } from "./ui";
+
 const Home = () => {
   return (
-    <>
-      <h1>Home</h1>
-    </>
+    <div style={{ maxWidth: "1440px" }}>
+      <Info />
+      <Faq />
+      <GetStarted />
+    </div>
   );
 };
 

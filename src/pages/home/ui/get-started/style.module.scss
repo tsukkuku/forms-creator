@@ -1,0 +1,33 @@
+.getStarted {
+  margin-block: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.sectionTitle {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 50px;
+  letter-spacing: -0.5px;
+}
+
+.loginButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.firstButton {
+  width: 350px;
+  font-size: 18px;
+}
+
+.secondButton {
+  width: 350px;
+  font-size: 18px;
+}

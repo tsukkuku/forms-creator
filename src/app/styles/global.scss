@@ -18,13 +18,17 @@
   --text-color: var(--color-black);
   --button-color: var(--color-dark);
   --button-text: var(--color-white);
+  --second-title: #5f6368;
+  --accordion-border: #dadce0;
 }
 
 [data-theme="dark"] {
-  --bg-color: #18181a;
+  --bg-color: #0b0b0c;
   --text-color: var(--color-smooth-white);
   --button-color: var(--color-smooth-white);
   --button-text: var(--color-black);
+  --second-title: #bdc1c6;
+  --accordion-border: #282828;
 }
 
 #root,

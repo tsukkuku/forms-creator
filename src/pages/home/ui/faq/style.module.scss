@@ -1,0 +1,27 @@
+.faqSection {
+  margin-top: 3.5rem;
+}
+
+.faqTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+
+  .title {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 50px;
+    letter-spacing: -0.5px;
+  }
+
+  .secondTitle {
+    color: var(--second-title);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 50px;
+    letter-spacing: -0.5px;
+  }
+}

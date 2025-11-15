@@ -1,0 +1,47 @@
+.infoSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 550px;
+
+  .title {
+    font-size: 54px;
+    font-weight: 700;
+  }
+
+  .secondTitle {
+    font-size: 18px;
+    color: var(--second-title);
+  }
+}
+
+.infoImg {
+  max-width: 500px;
+  max-height: 450px;
+
+  .img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.navigationButtons {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  .loginButton {
+    font-size: 18px;
+  }
+
+  .createButton {
+    min-width: 250px;
+    font-size: 18px;
+  }
+}

@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -30,7 +30,6 @@ export const useLogin = () => {
   };
 
   useEffect(() => {
-    const auth = getAuth();
     const sub = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setIsLoading(false);

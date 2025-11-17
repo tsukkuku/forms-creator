@@ -16,7 +16,11 @@ export const GetStarted = () => {
           className={style.firstButton}
           onClick={handleLogin}
           disabled={isLoading || !!user}
-          startContent={isLoading && <ClipLoader size={17} color="#a0a0a0" />}
+          startContent={
+            isLoading && (
+              <ClipLoader size={17} color="var(--button-disabled-text)" />
+            )
+          }
         >
           Войти
         </Button>

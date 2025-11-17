@@ -18,6 +18,8 @@
   --text-color: var(--color-black);
   --button-color: var(--color-dark);
   --button-text: var(--color-white);
+  --button-disabled-color: #404040;
+  --button-disabled-text: #a0a0a0;
   --second-title: #5f6368;
   --accordion-border: #dadce0;
 }
@@ -27,6 +29,8 @@
   --text-color: var(--color-smooth-white);
   --button-color: var(--color-smooth-white);
   --button-text: var(--color-black);
+  --button-disabled-color: #1e1e1e;
+  --button-disabled-text: #757575;
   --second-title: #bdc1c6;
   --accordion-border: #282828;
 }

@@ -1,7 +1,11 @@
 import { Button } from "@/shared/ui";
+import { useLogin } from "@/features/login";
 import style from "./style.module.scss";
+import { ClipLoader } from "react-spinners";
 
 export const Info = () => {
+  const { user, isLoading, handleLogin } = useLogin();
+
   return (
     <section className={style.infoSection}>
       <div className={style.titleContainer}>
@@ -11,7 +15,17 @@ export const Info = () => {
           получения обратной связи
         </p>
         <div className={style.navigationButtons}>
-          <Button className={style.loginButton} variant="primary">
+          <Button
+            className={style.loginButton}
+            variant="primary"
+            onClick={handleLogin}
+            disabled={isLoading || !!user}
+            startContent={
+              isLoading && (
+                <ClipLoader size={17} color="var(--button-disabled-text)" />
+              )
+            }
+          >
             Войти
           </Button>
           <Button variant="outline" className={style.createButton}>

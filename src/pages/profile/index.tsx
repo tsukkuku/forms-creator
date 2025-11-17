@@ -1,19 +1,12 @@
-import { Navigate } from "react-router-dom";
 import { Content } from "./ui/ui";
-import { useLogin } from "@/features/login";
+import { ProtectedRoute } from "@/features/login";
 
 const Profile = () => {
-  const { user, isLoading } = useLogin();
-
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
-
-  if (!user) {
-    return <Navigate to={"/"} replace />;
-  }
-
-  return <Content />;
+  return (
+    <ProtectedRoute>
+      <Content />
+    </ProtectedRoute>
+  );
 };
 
 export default Profile;

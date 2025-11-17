@@ -20,7 +20,11 @@ export const Header = () => {
           <Button
             onClick={handleLogin}
             disabled={isLoading || !!user}
-            startContent={isLoading && <ClipLoader size={13} color="#a0a0a0" />}
+            startContent={
+              isLoading && (
+                <ClipLoader size={13} color="var(--button-disabled-text)" />
+              )
+            }
           >
             Войти
           </Button>

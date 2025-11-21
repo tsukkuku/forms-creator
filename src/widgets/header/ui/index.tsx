@@ -3,9 +3,10 @@ import { useLogin } from "@/features/login";
 import style from "./style.module.scss";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
+import { UserInfo } from "./user-info";
 
 export const Header = () => {
-  const { user, isLoading, handleLogin, singOut } = useLogin();
+  const { user, isLoading, handleLogin } = useLogin();
 
   return (
     <header className={style.header}>
@@ -13,23 +14,21 @@ export const Header = () => {
         <span>Forms</span>
         <span>Creator</span>
       </Link>
-      <div className={style.loginBtn}>
-        {user ? (
-          <div onClick={singOut}>{user.displayName}</div>
-        ) : (
-          <Button
-            onClick={handleLogin}
-            disabled={isLoading || !!user}
-            startContent={
-              isLoading && (
-                <ClipLoader size={13} color="var(--button-disabled-text)" />
-              )
-            }
-          >
-            Войти
-          </Button>
-        )}
-      </div>
+      {user ? (
+        <UserInfo user={user} />
+      ) : (
+        <Button
+          onClick={handleLogin}
+          disabled={isLoading || !!user}
+          startContent={
+            isLoading && (
+              <ClipLoader size={13} color="var(--button-disabled-text)" />
+            )
+          }
+        >
+          Войти
+        </Button>
+      )}
     </header>
   );
 };

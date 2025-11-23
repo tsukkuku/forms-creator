@@ -1,18 +1,56 @@
+import { Modal } from "@/shared/ui";
 import { useAppDispatch, useAppSelector } from "@/shared/lib";
 import { setTheme } from "../model";
-import { LuMoon, LuSun } from "react-icons/lu";
+import { FaCircleCheck } from "react-icons/fa6";
+import light from "./img/light.svg";
+import dark from "./img/dark.svg";
+import style from "./style.module.scss";
 
-export const SwitchButton = () => {
-  const theme = useAppSelector((state) => state.theme.theme);
+interface ThemeModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const ThemeModal = ({ isOpen, onClose }: ThemeModalProps) => {
+  const { theme } = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch();
 
-  const changeTheme = () => {
-    dispatch(setTheme());
-  };
-
   return (
-    <button onClick={changeTheme}>
-      {theme === "light" ? <LuMoon size={20} /> : <LuSun size={20} />}
-    </button>
+    <Modal title="Выберите тему" isOpen={isOpen} onClose={onClose}>
+      <div className={style.themeModal}>
+        <div className={style.themeCard}>
+          <img
+            src={light}
+            alt="Light theme"
+            className={style.img}
+            onClick={() => dispatch(setTheme("light"))}
+          />
+          <div className={style.themeName}>
+            <div className={style.name}>Светлая</div>
+            {theme === "light" && (
+              <div className={style.checkIcon}>
+                <FaCircleCheck size={24} />
+              </div>
+            )}
+          </div>
+        </div>
+        <div className={style.themeCard}>
+          <img
+            src={dark}
+            alt="Dark theme"
+            className={style.img}
+            onClick={() => dispatch(setTheme("dark"))}
+          />
+          <div className={style.themeName}>
+            <div className={style.name}>Темная</div>
+            {theme === "dark" && (
+              <div className={style.checkIcon}>
+                <FaCircleCheck size={24} />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </Modal>
   );
 };

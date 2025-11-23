@@ -1,16 +1,23 @@
 import { useLogin } from "@/features/login";
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
 import style from "./style.module.scss";
 
 interface DropdownProps {
   isOpen: boolean;
   onClose: () => void;
+  open: () => void;
 }
 
-export const Dropdown = ({ isOpen, onClose }: DropdownProps) => {
+export const Dropdown = ({ isOpen, onClose, open }: DropdownProps) => {
   const { singOut } = useLogin();
   const ref = useRef<HTMLDivElement>(null);
+
+  const openModal = () => {
+    open();
+    onClose();
+  };
 
   useEffect(() => {
     const handleClose = (e: MouseEvent) => {
@@ -31,12 +38,16 @@ export const Dropdown = ({ isOpen, onClose }: DropdownProps) => {
       {isOpen && (
         <div className={style.dropDown} ref={ref}>
           <div className={style.dropDownContent}>
-            <div className={style.dropDownItem}>
-              <Link className={style.dropDownItemLink} to={"/me"}>
-                Мои формы
-              </Link>
+            <Link
+              className={clsx(style.dropDownItem, style.dropDownItemLink)}
+              to={"/me"}
+              onClick={onClose}
+            >
+              Мои формы
+            </Link>
+            <div className={style.dropDownItem} onClick={openModal}>
+              Сменить тему
             </div>
-            <div className={style.dropDownItem}>Изменить тему</div>
             <div className={style.dropDownItem} onClick={singOut}>
               Выйти
             </div>

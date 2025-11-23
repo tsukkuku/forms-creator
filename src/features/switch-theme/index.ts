@@ -1,3 +1,2 @@
+export * from "./ui";
 export { themeSlice } from "./model";
-
-export { SwitchButton } from "./ui";

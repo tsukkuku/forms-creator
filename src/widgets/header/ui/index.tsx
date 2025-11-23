@@ -1,9 +1,9 @@
 import { Button } from "@/shared/ui";
 import { useLogin } from "@/features/login";
-import style from "./style.module.scss";
 import { Link } from "react-router-dom";
-import { ClipLoader } from "react-spinners";
 import { UserInfo } from "./user-info";
+import { ClipLoader } from "react-spinners";
+import style from "./style.module.scss";
 
 export const Header = () => {
   const { user, isLoading, handleLogin } = useLogin();

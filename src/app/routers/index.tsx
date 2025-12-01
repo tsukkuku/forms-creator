@@ -4,6 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 const HomeLayout = lazy(() => import("@/app/layouts/home-layout"));
 const Home = lazy(() => import("@/pages/home"));
 const Profile = lazy(() => import("@/pages/profile"));
+const CreateForm = lazy(() => import("@/pages/create-form"));
 
 export const router = createBrowserRouter([
   {
@@ -14,4 +15,5 @@ export const router = createBrowserRouter([
       { path: "/me", Component: Profile },
     ],
   },
+  { path: "/form/:id", Component: CreateForm },
 ]);

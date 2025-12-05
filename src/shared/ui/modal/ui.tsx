@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import style from "./style.module.scss";
 import clsx from "clsx";
 import { MdClose } from "react-icons/md";
+import { createPortal } from "react-dom";
 
 interface ModalProps {
   title: string;
@@ -11,7 +12,7 @@ interface ModalProps {
 }
 
 export const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
-  return (
+  return createPortal(
     <div
       className={clsx(style.modal, isOpen && style.active)}
       onClick={onClose}
@@ -35,6 +36,7 @@ export const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
           <div className={style.modalBody}>{children}</div>
         </div>
       )}
-    </div>
+    </div>,
+    document.body
   );
 };

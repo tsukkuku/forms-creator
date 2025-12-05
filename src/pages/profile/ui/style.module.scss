@@ -15,17 +15,10 @@
   gap: 7px;
 }
 
-.forms {
-  display: flex;
-  justify-content: center;
+.myForms {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-items: center;
   align-items: center;
-  gap: 10px;
-}
-
-.formCard {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
 }

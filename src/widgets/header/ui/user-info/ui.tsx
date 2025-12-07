@@ -1,7 +1,8 @@
 import type { User } from "firebase/auth";
 import { useState } from "react";
-import { Dropdown } from "../dropdown";
 import { ThemeModal } from "@/features/switch-theme";
+import { Dropdown } from "@/shared/ui";
+import { useLogin } from "@/features/login";
 import style from "./style.module.scss";
 
 interface UserInfoProps {
@@ -9,6 +10,7 @@ interface UserInfoProps {
 }
 
 export const UserInfo = ({ user }: UserInfoProps) => {
+  const { singOut } = useLogin();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isModal, setIsModal] = useState<boolean>(false);
 
@@ -29,7 +31,17 @@ export const UserInfo = ({ user }: UserInfoProps) => {
           className={style.avatar}
         />
       </div>
-      <Dropdown isOpen={isOpen} onClose={handleOpen} open={handleOpenModal} />
+      <Dropdown isOpen={isOpen} onClose={handleOpen} top={45} right={10}>
+        <Dropdown.Link path="/me" onClose={handleOpen}>
+          Мои формы
+        </Dropdown.Link>
+        <Dropdown.Item onClose={handleOpen} onClick={handleOpenModal}>
+          Сменить тему
+        </Dropdown.Item>
+        <Dropdown.Item onClick={singOut} onClose={handleOpen}>
+          Выйти
+        </Dropdown.Item>
+      </Dropdown>
       <ThemeModal isOpen={isModal} onClose={handleOpenModal} />
     </div>
   );

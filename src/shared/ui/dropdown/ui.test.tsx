@@ -20,7 +20,9 @@ describe("Dropdown tests", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toBeInTheDocument();
     expect(dropdown).toHaveClass(/active/i);
+    expect(dropdown).toHaveTextContent(/test/i);
   });
   test("Dropdown not render", () => {
     render(
@@ -30,7 +32,9 @@ describe("Dropdown tests", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toBeInTheDocument();
     expect(dropdown).not.toHaveClass(/active/i);
+    expect(dropdown).not.toHaveTextContent(/test/i);
   });
   test("Dropdown not close when click inside", () => {
     render(

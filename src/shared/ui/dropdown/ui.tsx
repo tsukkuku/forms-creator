@@ -1,4 +1,4 @@
-import { useEffect, useRef, type PropsWithChildren } from "react";
+import { useEffect, useRef, useState, type PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import style from "./style.module.scss";
@@ -21,16 +21,24 @@ export const Dropdown = ({
   children,
 }: PropsWithChildren<DropdownProps>) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleClose = (e: MouseEvent) => {
-      if (ref && !ref.current?.contains(e.target as Node)) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
         onClose();
       }
     };
 
     if (isOpen) {
+      setIsVisible(true);
       document.addEventListener("mousedown", handleClose);
+    } else {
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+      }, 250);
+
+      return () => clearTimeout(timer);
     }
 
     return () => document.removeEventListener("mousedown", handleClose);
@@ -43,7 +51,7 @@ export const Dropdown = ({
       style={{ top: `${top}px`, left: `${left}px`, right: `${right}px` }}
       data-testid="dropdown"
     >
-      <div className={style.dropDownContent}>{children}</div>
+      {isVisible && <div className={style.dropDownContent}>{children}</div>}
     </div>
   );
 };
@@ -53,7 +61,7 @@ Dropdown.Item = ({
   onClose,
   onClick,
 }: PropsWithChildren<Omit<DropdownProps, "isOpen">>) => {
-  const handleClose = (e: any) => {
+  const handleClose = (e: React.MouseEvent) => {
     e.preventDefault();
     onClick?.();
     onClose();

@@ -11,12 +11,12 @@
   overflow: hidden;
   transform: translateY(-10px) scale(0.95);
   transition: 0.25s;
-}
 
-.dropDown.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scale(1);
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .dropDownContent {

@@ -8,7 +8,13 @@ export const Content = () => {
   const { forms, isLoading, getAllForms, createForm } = useForms();
 
   useEffect(() => {
-    getAllForms();
+    const unsubscribe = getAllForms();
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
   }, []);
 
   const loadForms = () => {

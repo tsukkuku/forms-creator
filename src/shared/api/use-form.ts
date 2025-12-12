@@ -37,10 +37,10 @@ export const useForms = () => {
     }
   };
 
-  const getAllForms = async () => {
+  const getAllForms = () => {
     try {
       setIsLoading(true);
-      const forms = await query(collection(db, "forms"));
+      const forms = query(collection(db, "forms"));
       const getForms = onSnapshot(forms, (q) => {
         const res: FormData[] = [];
         q.forEach((item) => res.push({ id: item.id, ...item.data() }));
@@ -48,8 +48,9 @@ export const useForms = () => {
         setIsLoading(false);
       });
 
-      return () => getForms();
+      return getForms;
     } catch (error) {
+      setIsLoading(false);
       if (error instanceof Error) {
         console.log(error.message);
       }

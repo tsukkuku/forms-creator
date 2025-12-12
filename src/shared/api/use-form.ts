@@ -1,0 +1,71 @@
+import type { FormData } from "../model";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getFirestore,
+  onSnapshot,
+  query,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+export const useForms = () => {
+  const [forms, setForms] = useState<FormData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const db = getFirestore();
+
+  const createForm = async () => {
+    try {
+      const formId: string = crypto.randomUUID();
+      navigate(`/form/${formId}`);
+
+      await setDoc(doc(db, "forms", formId), {
+        id: formId,
+        name: "Новая форма",
+        createdAt: serverTimestamp(),
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error("Неизвестная ошибка", error);
+      }
+    }
+  };
+
+  const getAllForms = async () => {
+    try {
+      setIsLoading(true);
+      const forms = await query(collection(db, "forms"));
+      const getForms = onSnapshot(forms, (q) => {
+        const res: FormData[] = [];
+        q.forEach((item) => res.push({ id: item.id, ...item.data() }));
+        setForms(res);
+        setIsLoading(false);
+      });
+
+      return () => getForms();
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  };
+
+  const deleteForm = async (id: string) => {
+    try {
+      await deleteDoc(doc(db, "forms", id));
+      console.log("Форма успешна удалена!", id);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  };
+
+  return { forms, isLoading, createForm, getAllForms, deleteForm };
+};

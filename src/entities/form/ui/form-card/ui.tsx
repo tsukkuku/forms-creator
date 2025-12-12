@@ -1,7 +1,8 @@
 import { useState, type MouseEvent } from "react";
+import { useForms } from "@/shared/api";
 import { Link } from "react-router-dom";
-import type { FormData } from "../../model/types";
 import { formatDate } from "../../lib";
+import type { FormData } from "@/shared/model";
 import stub from "./img/Image-not-found.png";
 import { MdAccessTimeFilled } from "react-icons/md";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
@@ -13,6 +14,7 @@ interface FormCardProps {
 }
 
 export const FormCard = ({ form }: FormCardProps) => {
+  const { deleteForm } = useForms();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
@@ -40,7 +42,12 @@ export const FormCard = ({ form }: FormCardProps) => {
           </div>
           <Dropdown isOpen={isOpen} onClose={handleOpen} top={35} right={10}>
             <Dropdown.Item onClose={handleOpen}>Переименовать</Dropdown.Item>
-            <Dropdown.Item onClose={handleOpen}>Удалить</Dropdown.Item>
+            <Dropdown.Item
+              onClose={handleOpen}
+              onClick={() => deleteForm(form.id)}
+            >
+              Удалить
+            </Dropdown.Item>
           </Dropdown>
         </div>
       </div>

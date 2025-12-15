@@ -21,6 +21,12 @@
     color: var(--text-color);
   }
 
+  &.danger {
+    background-color: transparent;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+  }
+
   &:disabled {
     background-color: var(--button-disabled-color);
     color: var(--button-disabled-text);

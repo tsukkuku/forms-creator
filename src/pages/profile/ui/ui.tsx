@@ -1,8 +1,8 @@
 import { Button } from "@/shared/ui";
 import { useEffect } from "react";
-import { FormCard } from "@/entities/form";
-import style from "./style.module.scss";
 import { useForms } from "@/shared/api";
+import { FormList } from "@/widgets/form-list";
+import style from "./style.module.scss";
 
 export const Content = () => {
   const { forms, isLoading, getAllForms, createForm } = useForms();
@@ -23,7 +23,7 @@ export const Content = () => {
     } else if (forms.length === 0) {
       return <h1>У вас нету форм.</h1>;
     } else {
-      return forms.map((item) => <FormCard key={item.id} form={item} />);
+      return <FormList forms={forms} />;
     }
   };
 

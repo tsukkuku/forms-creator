@@ -12,8 +12,9 @@ describe("Modal component tests", () => {
 
   test("check render Modal", () => {
     render(
-      <Modal isOpen title="Test title" onClose={onCloseMock}>
-        Modal
+      <Modal isOpen onClose={onCloseMock}>
+        <Modal.Header onClose={onCloseMock}>Test</Modal.Header>
+        <Modal.Body>Modal</Modal.Body>
       </Modal>
     );
 
@@ -25,7 +26,7 @@ describe("Modal component tests", () => {
   });
   test("not render Modal", () => {
     render(
-      <Modal isOpen={false} title="Test title" onClose={onCloseMock}>
+      <Modal isOpen={false} onClose={onCloseMock}>
         Modal
       </Modal>
     );
@@ -37,7 +38,7 @@ describe("Modal component tests", () => {
   });
   test("click on to empty space for close Modal", () => {
     render(
-      <Modal isOpen={true} title="Test title" onClose={onCloseMock}>
+      <Modal isOpen onClose={onCloseMock}>
         Modal
       </Modal>
     );
@@ -53,7 +54,7 @@ describe("Modal component tests", () => {
   });
   test("click on the Modal content", () => {
     render(
-      <Modal isOpen={true} title="Test title" onClose={onCloseMock}>
+      <Modal isOpen onClose={onCloseMock}>
         Modal
       </Modal>
     );
@@ -70,8 +71,9 @@ describe("Modal component tests", () => {
   });
   test("click on the close icon for close Modal", () => {
     render(
-      <Modal isOpen={true} title="Test title" onClose={onCloseMock}>
-        Modal
+      <Modal isOpen onClose={onCloseMock}>
+        <Modal.Header onClose={onCloseMock}>Test</Modal.Header>
+        <Modal.Body>Modal</Modal.Body>
       </Modal>
     );
 

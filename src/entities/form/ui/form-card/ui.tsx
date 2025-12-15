@@ -1,5 +1,4 @@
 import { useState, type MouseEvent } from "react";
-import { useForms } from "@/shared/api";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../lib";
 import type { FormData } from "@/shared/model";
@@ -11,10 +10,10 @@ import style from "./style.module.scss";
 
 interface FormCardProps {
   form: FormData;
+  open: () => void;
 }
 
-export const FormCard = ({ form }: FormCardProps) => {
-  const { deleteForm } = useForms();
+export const FormCard = ({ form, open }: FormCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
@@ -42,10 +41,7 @@ export const FormCard = ({ form }: FormCardProps) => {
           </div>
           <Dropdown isOpen={isOpen} onClose={handleOpen} top={35} right={10}>
             <Dropdown.Item onClose={handleOpen}>Переименовать</Dropdown.Item>
-            <Dropdown.Item
-              onClose={handleOpen}
-              onClick={() => deleteForm(form.id)}
-            >
+            <Dropdown.Item onClose={handleOpen} onClick={open}>
               Удалить
             </Dropdown.Item>
           </Dropdown>

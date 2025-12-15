@@ -16,41 +16,44 @@ export const ThemeModal = ({ isOpen, onClose }: ThemeModalProps) => {
   const dispatch = useAppDispatch();
 
   return (
-    <Modal title="Выберите тему" isOpen={isOpen} onClose={onClose}>
-      <div className={style.themeModal}>
-        <div className={style.themeCard}>
-          <img
-            src={light}
-            alt="Light theme"
-            className={style.img}
-            onClick={() => dispatch(setTheme("light"))}
-          />
-          <div className={style.themeName}>
-            <div className={style.name}>Светлая</div>
-            {theme === "light" && (
-              <div className={style.checkIcon}>
-                <FaCircleCheck size={24} />
-              </div>
-            )}
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal.Header onClose={onClose}>Выберите тему</Modal.Header>
+      <Modal.Body>
+        <div className={style.themeModal}>
+          <div className={style.themeCard}>
+            <img
+              src={light}
+              alt="Light theme"
+              className={style.img}
+              onClick={() => dispatch(setTheme("light"))}
+            />
+            <div className={style.themeName}>
+              <div className={style.name}>Светлая</div>
+              {theme === "light" && (
+                <div className={style.checkIcon}>
+                  <FaCircleCheck size={24} />
+                </div>
+              )}
+            </div>
+          </div>
+          <div className={style.themeCard}>
+            <img
+              src={dark}
+              alt="Dark theme"
+              className={style.img}
+              onClick={() => dispatch(setTheme("dark"))}
+            />
+            <div className={style.themeName}>
+              <div className={style.name}>Темная</div>
+              {theme === "dark" && (
+                <div className={style.checkIcon}>
+                  <FaCircleCheck size={24} />
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        <div className={style.themeCard}>
-          <img
-            src={dark}
-            alt="Dark theme"
-            className={style.img}
-            onClick={() => dispatch(setTheme("dark"))}
-          />
-          <div className={style.themeName}>
-            <div className={style.name}>Темная</div>
-            {theme === "dark" && (
-              <div className={style.checkIcon}>
-                <FaCircleCheck size={24} />
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+      </Modal.Body>
     </Modal>
   );
 };

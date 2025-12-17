@@ -10,10 +10,11 @@ import style from "./style.module.scss";
 
 interface FormCardProps {
   form: FormData;
-  open: () => void;
+  onRename: () => void;
+  onDelete: () => void;
 }
 
-export const FormCard = ({ form, open }: FormCardProps) => {
+export const FormCard = ({ form, onRename, onDelete }: FormCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
@@ -40,8 +41,10 @@ export const FormCard = ({ form, open }: FormCardProps) => {
             <PiDotsThreeOutlineVerticalFill size={18} />
           </div>
           <Dropdown isOpen={isOpen} onClose={handleOpen} top={35} right={10}>
-            <Dropdown.Item onClose={handleOpen}>Переименовать</Dropdown.Item>
-            <Dropdown.Item onClose={handleOpen} onClick={open}>
+            <Dropdown.Item onClose={handleOpen} onClick={onRename}>
+              Переименовать
+            </Dropdown.Item>
+            <Dropdown.Item onClose={handleOpen} onClick={onDelete}>
               Удалить
             </Dropdown.Item>
           </Dropdown>

@@ -5,9 +5,11 @@ import {
   doc,
   getFirestore,
   onSnapshot,
+  orderBy,
   query,
   serverTimestamp,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -40,7 +42,10 @@ export const useForms = () => {
   const getAllForms = () => {
     try {
       setIsLoading(true);
-      const forms = query(collection(db, "forms"));
+      const forms = query(
+        collection(db, "forms"),
+        orderBy("createdAt", "desc")
+      );
       const getForms = onSnapshot(forms, (q) => {
         const res: FormData[] = [];
         q.forEach((item) => res.push({ id: item.id, ...item.data() }));
@@ -68,5 +73,27 @@ export const useForms = () => {
     }
   };
 
-  return { forms, isLoading, createForm, getAllForms, deleteForm };
+  const updateFormTitle = async (formID: string, newName: string) => {
+    try {
+      const formTitle = doc(db, "forms", formID);
+      await updateDoc(formTitle, {
+        name: newName,
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error("Неизвестная ошибка", error);
+      }
+    }
+  };
+
+  return {
+    forms,
+    isLoading,
+    createForm,
+    getAllForms,
+    deleteForm,
+    updateFormTitle,
+  };
 };

@@ -1,0 +1,21 @@
+.inputContainer {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  transition: 0.3s;
+
+  &.error {
+    border: 1px solid #dc3545;
+  }
+}
+
+.errorMessage {
+  font-size: 14px;
+  color: #dc3545;
+  margin-top: 6px;
+}

@@ -2,23 +2,26 @@ import { useState } from "react";
 import { FormCard } from "@/entities/form";
 import type { FormData } from "@/shared/model";
 import { ConfirmModal } from "./confirm-modal";
+import { RenameModal } from "./rename-modal";
 import style from "./style.module.scss";
+
+type ModalType = "rename" | "delete" | null;
 
 interface FormListProps {
   forms: FormData[];
 }
 
 export const FormList = ({ forms }: FormListProps) => {
+  const [active, setActive] = useState<ModalType>(null);
   const [formID, setFormID] = useState<string | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpen = (id: string) => {
+  const handleOpen = (type: ModalType, id: string) => {
     setFormID(id);
-    setIsOpen(true);
+    setActive(type);
   };
 
   const handleClose = () => {
-    setIsOpen(false);
+    setActive(null);
     setFormID(null);
   };
 
@@ -29,12 +32,18 @@ export const FormList = ({ forms }: FormListProps) => {
           <FormCard
             key={form.id}
             form={form}
-            open={() => handleOpen(form.id)}
+            onRename={() => handleOpen("rename", form.id)}
+            onDelete={() => handleOpen("delete", form.id)}
           />
         ))}
       </div>
 
-      <ConfirmModal isOpen={isOpen} onClose={handleClose} formID={formID} />
+      <RenameModal isOpen={active === "rename"} onClose={handleClose} formID={formID}/>
+      <ConfirmModal
+        isOpen={active === "delete"}
+        onClose={handleClose}
+        formID={formID}
+      />
     </>
   );
 };

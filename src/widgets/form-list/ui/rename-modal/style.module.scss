@@ -1,0 +1,32 @@
+.renameModal {
+  max-width: 500px;
+  min-height: 0;
+}
+
+.renameHeader {
+  margin-bottom: 20px;
+}
+
+.renameTitle {
+  text-align: start;
+}
+
+.renameForm {
+  width: 100%;
+}
+
+.secondTitle {
+  width: 100%;
+  text-align: start;
+  color: var(--second-title);
+  margin-bottom: 10px;
+}
+
+.buttonsGroup {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}

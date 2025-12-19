@@ -13,9 +13,12 @@ interface FormListProps {
 
 export const FormList = ({ forms }: FormListProps) => {
   const [active, setActive] = useState<ModalType>(null);
+  const [selectedForm, setSelectedForm] = useState<FormData | null>(null);
   const [formID, setFormID] = useState<string | null>(null);
 
   const handleOpen = (type: ModalType, id: string) => {
+    const form = forms.find((form) => form.id === id);
+    setSelectedForm(form || null);
     setFormID(id);
     setActive(type);
   };
@@ -38,7 +41,12 @@ export const FormList = ({ forms }: FormListProps) => {
         ))}
       </div>
 
-      <RenameModal isOpen={active === "rename"} onClose={handleClose} formID={formID}/>
+      <RenameModal
+        isOpen={active === "rename"}
+        onClose={handleClose}
+        formID={formID}
+        formName={selectedForm?.name}
+      />
       <ConfirmModal
         isOpen={active === "delete"}
         onClose={handleClose}

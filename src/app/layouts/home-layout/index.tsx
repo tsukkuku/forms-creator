@@ -1,14 +1,17 @@
 import { Header } from "@/widgets/header";
 import { ProgressBar } from "@/widgets/progress-bar";
-import { Outlet } from "react-router-dom";
-import style from "./style.module.scss";
+import { matchPath, Outlet, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import style from "./style.module.scss";
 
 const HomeLayout = () => {
+  const location = useLocation();
+  const checkPage = matchPath("/form/:id", location.pathname);
+
   return (
     <>
       <ProgressBar />
-      <Header />
+      {checkPage ? <Header isFormPage /> : <Header />}
       <main className={style.mainContent}>
         <Outlet />
       </main>

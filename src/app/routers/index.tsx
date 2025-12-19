@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "/me", Component: Profile },
+      { path: "/form/:id", Component: CreateForm },
     ],
   },
-  { path: "/form/:id", Component: CreateForm },
 ]);

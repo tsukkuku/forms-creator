@@ -3,6 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getFirestore,
   onSnapshot,
   orderBy,
@@ -88,10 +89,29 @@ export const useForms = () => {
     }
   };
 
+  const getFormInfo = async (formID: string): Promise<FormData | null> => {
+    try {
+      setIsLoading(true);
+      const docRef = doc(db, "forms", formID);
+      const formInfo = await getDoc(docRef);
+
+      if (formInfo.exists()) {
+        return formInfo.data() as FormData;
+      } else {
+        throw new Error("Форма не найдена");
+      }
+    } catch (e) {
+      throw e;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     forms,
     isLoading,
     createForm,
+    getFormInfo,
     getAllForms,
     deleteForm,
     updateFormTitle,

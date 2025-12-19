@@ -3,9 +3,14 @@ import { useLogin } from "@/features/login";
 import { Link } from "react-router-dom";
 import { UserInfo } from "./user-info";
 import { ClipLoader } from "react-spinners";
+import { ActionButton } from "./action-button";
 import style from "./style.module.scss";
 
-export const Header = () => {
+interface HeaderProps {
+  isFormPage?: boolean;
+}
+
+export const Header = ({ isFormPage = false }: HeaderProps) => {
   const { user, isLoading, handleLogin } = useLogin();
 
   return (
@@ -15,7 +20,10 @@ export const Header = () => {
         <span>Creator</span>
       </Link>
       {user ? (
-        <UserInfo user={user} />
+        <div className={style.actionButtons}>
+          {isFormPage && <ActionButton />}
+          <UserInfo user={user} />
+        </div>
       ) : (
         <Button
           onClick={handleLogin}

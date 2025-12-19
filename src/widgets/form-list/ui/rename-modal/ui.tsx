@@ -8,9 +8,15 @@ interface RenameModalProps {
   isOpen: boolean;
   onClose: () => void;
   formID: string | null;
+  formName?: string;
 }
 
-export const RenameModal = ({ isOpen, onClose, formID }: RenameModalProps) => {
+export const RenameModal = ({
+  isOpen,
+  onClose,
+  formID,
+  formName,
+}: RenameModalProps) => {
   const { updateFormTitle } = useForms();
   const [value, setValue] = useState<string>("");
   const [disabled, setDisabled] = useState<boolean>(false);
@@ -48,7 +54,7 @@ export const RenameModal = ({ isOpen, onClose, formID }: RenameModalProps) => {
   }, [value]);
 
   useEffect(() => {
-    setValue("");
+    if (formName) setValue(formName);
     setDisabled(false);
     setError("");
   }, [isOpen]);

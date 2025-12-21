@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth";
 import type { FormData } from "../model";
 import {
   collection,
@@ -14,22 +15,35 @@ import {
 } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export const useForms = () => {
   const [forms, setForms] = useState<FormData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const auth = getAuth();
   const db = getFirestore();
 
   const createForm = async () => {
     try {
       const formId: string = crypto.randomUUID();
+      const user = auth.currentUser;
+
+      if (!user) {
+        toast.error("Вы не авторизованы");
+        throw new Error("Пользователь не авторизован");
+      }
+
       navigate(`/form/${formId}`);
 
       await setDoc(doc(db, "forms", formId), {
         id: formId,
         name: "Новая форма",
+        description: "Описание",
+        creator: user.displayName,
+        creatorID: user.uid,
         createdAt: serverTimestamp(),
+        updateAt: serverTimestamp(),
       });
     } catch (error) {
       if (error instanceof Error) {
@@ -49,7 +63,7 @@ export const useForms = () => {
       );
       const getForms = onSnapshot(forms, (q) => {
         const res: FormData[] = [];
-        q.forEach((item) => res.push({ id: item.id, ...item.data() }));
+        q.forEach((item) => res.push({ ...(item.data() as FormData) }));
         setForms(res);
         setIsLoading(false);
       });
@@ -79,6 +93,7 @@ export const useForms = () => {
       const formTitle = doc(db, "forms", formID);
       await updateDoc(formTitle, {
         name: newName,
+        updateAt: serverTimestamp(),
       });
     } catch (error) {
       if (error instanceof Error) {
@@ -89,7 +104,7 @@ export const useForms = () => {
     }
   };
 
-  const getFormInfo = async (formID: string): Promise<FormData | null> => {
+  const getFormInfo = async (formID: string): Promise<FormData> => {
     try {
       setIsLoading(true);
       const docRef = doc(db, "forms", formID);
@@ -107,6 +122,22 @@ export const useForms = () => {
     }
   };
 
+  const updateForm = async (formID: string, changedValues: any) => {
+    try {
+      const form = doc(db, "forms", formID);
+      await updateDoc(form, {
+        ...changedValues,
+        updateAt: serverTimestamp(),
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error("Неизвестная ошибка", error);
+      }
+    }
+  };
+
   return {
     forms,
     isLoading,
@@ -115,5 +146,6 @@ export const useForms = () => {
     getAllForms,
     deleteForm,
     updateFormTitle,
+    updateForm,
   };
 };

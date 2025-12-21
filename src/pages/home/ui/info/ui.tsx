@@ -2,9 +2,11 @@ import { Button } from "@/shared/ui";
 import { useLogin } from "@/features/login";
 import style from "./style.module.scss";
 import { ClipLoader } from "react-spinners";
+import { useForms } from "@/shared/api";
 
 export const Info = () => {
   const { user, isLoading, handleLogin } = useLogin();
+  const { createForm } = useForms();
 
   return (
     <section className={style.infoSection}>
@@ -28,7 +30,11 @@ export const Info = () => {
           >
             Войти
           </Button>
-          <Button variant="outline" className={style.createButton}>
+          <Button
+            variant="outline"
+            className={style.createButton}
+            onClick={createForm}
+          >
             Создать форму
           </Button>
         </div>

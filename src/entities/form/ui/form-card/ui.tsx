@@ -2,8 +2,7 @@ import { useState, type MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../lib";
 import type { FormData } from "@/shared/model";
-import stub from "./img/Image-not-found.png";
-import { MdAccessTimeFilled } from "react-icons/md";
+import { MdAccessTimeFilled, MdEdit } from "react-icons/md";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { Dropdown } from "@/shared/ui";
 import style from "./style.module.scss";
@@ -28,15 +27,23 @@ export const FormCard = ({ form, onRename, onDelete }: FormCardProps) => {
 
   return (
     <Link to={`/form/${form.id}`} className={style.link}>
-      <div className={style.formLogo}>
-        <img src={stub} alt="Заглушка" className={style.logo} />
-      </div>
       <div className={style.formInfo}>
         <div className={style.formName}>{form.name}</div>
+        <div className={style.formDesc}>{form.description}</div>
         <div className={style.formCreateDate}>
-          <div className={style.createDate}>
-            <MdAccessTimeFilled /> {formatDate(form.createdAt)}
-          </div>
+          {form.updateAt?.toMillis() === form.createdAt?.toMillis() ? (
+            <div className={style.createDate}>
+              <MdAccessTimeFilled />
+              <span>Создано:</span>
+              <span>{formatDate("create", form.createdAt)}</span>
+            </div>
+          ) : (
+            <div className={style.updateDate}>
+              <MdEdit />
+              <span>Изменено:</span>
+              <span>{formatDate("update", form.updateAt)}</span>
+            </div>
+          )}
           <div className={style.settingsIcon} onClick={openDropDown}>
             <PiDotsThreeOutlineVerticalFill size={18} />
           </div>

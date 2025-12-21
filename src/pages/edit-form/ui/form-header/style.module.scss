@@ -1,0 +1,32 @@
+.formHeader {
+  max-width: 1440px;
+  width: 100%;
+  border: 1px solid var(--input-border);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.formHeaderInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.changeTitleInput {
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--input-border);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.changeDescription {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.creatorName {
+  font-size: 14px;
+  font-weight: 700;
+}

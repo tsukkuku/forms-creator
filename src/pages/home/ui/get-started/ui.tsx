@@ -2,9 +2,11 @@ import { Button } from "@/shared/ui";
 import style from "./style.module.scss";
 import { useLogin } from "@/features/login";
 import { ClipLoader } from "react-spinners";
+import { useForms } from "@/shared/api";
 
 export const GetStarted = () => {
   const { user, isLoading, handleLogin } = useLogin();
+  const { createForm } = useForms();
 
   return (
     <section className={style.getStarted}>
@@ -24,7 +26,11 @@ export const GetStarted = () => {
         >
           Войти
         </Button>
-        <Button variant="outline" className={style.secondButton}>
+        <Button
+          variant="outline"
+          className={style.secondButton}
+          onClick={createForm}
+        >
           Создать форму
         </Button>
       </div>

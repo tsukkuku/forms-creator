@@ -8,4 +8,20 @@ export interface FormData {
   updateAt: Timestamp;
   creator: string;
   creatorID: string;
+  questions: Question[];
 }
+
+export interface Question {
+  id: string;
+  name: string;
+  desc?: string;
+  type: QuestionTypes;
+  options: Option[];
+}
+
+export interface Option {
+  id: string;
+  name: string;
+}
+
+export type QuestionTypes = "one" | "many" | "short" | "long";

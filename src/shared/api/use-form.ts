@@ -44,6 +44,14 @@ export const useForms = () => {
         creatorID: user.uid,
         createdAt: serverTimestamp(),
         updateAt: serverTimestamp(),
+        questions: [
+          {
+            id: crypto.randomUUID(),
+            name: "Вопрос без названия",
+            type: "one",
+            options: [{ id: crypto.randomUUID(), name: "Вариант 1" }],
+          },
+        ],
       });
     } catch (error) {
       if (error instanceof Error) {

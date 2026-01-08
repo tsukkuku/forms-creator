@@ -1,0 +1,30 @@
+.optionCard {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.optionTitle {
+  font-size: 14px;
+  line-height: 1.6;
+  word-break: break-word;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.optionInfo {
+  max-width: 850px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.optionInput {
+  font-size: 14px;
+}
+
+.deleteOptionBtn {
+  padding: 5px;
+}

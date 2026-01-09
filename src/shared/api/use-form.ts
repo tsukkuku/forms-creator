@@ -34,7 +34,7 @@ export const useForms = () => {
         throw new Error("Пользователь не авторизован");
       }
 
-      navigate(`/form/${formId}`);
+      navigate(`/form/${formId}/edit`);
 
       await setDoc(doc(db, "forms", formId), {
         id: formId,

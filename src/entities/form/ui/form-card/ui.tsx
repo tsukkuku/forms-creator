@@ -1,6 +1,6 @@
 import { useState, type MouseEvent } from "react";
 import { Link } from "react-router-dom";
-import { formatDate } from "../../lib";
+import { accessControl, formatDate } from "../../lib";
 import type { FormData } from "@/shared/model";
 import { MdAccessTimeFilled, MdEdit } from "react-icons/md";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
@@ -26,7 +26,7 @@ export const FormCard = ({ form, onRename, onDelete }: FormCardProps) => {
   };
 
   return (
-    <Link to={`/form/${form.id}`} className={style.link}>
+    <Link to={accessControl(form.id, form.creatorID)} className={style.link}>
       <div className={style.formInfo}>
         <div className={style.formName}>{form.name}</div>
         <div className={style.formDesc}>{form.description}</div>

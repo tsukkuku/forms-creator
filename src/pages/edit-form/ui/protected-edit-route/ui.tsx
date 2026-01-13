@@ -1,6 +1,8 @@
-import { useForms } from "@/shared/api";
+import type { FormData } from "@/shared/model";
 import { getAuth } from "firebase/auth";
-import { useEffect, useState, type ReactNode } from "react";
+import { doc, DocumentReference, getFirestore } from "firebase/firestore";
+import { type ReactNode } from "react";
+import { useDocumentData } from "react-firebase-hooks/firestore";
 import { Navigate } from "react-router-dom";
 
 interface ProtectedEditRouteProps {
@@ -12,29 +14,15 @@ export const ProtectedEditRoute = ({
   formID,
   children,
 }: ProtectedEditRouteProps) => {
-  const [creatorID, setCreatorID] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const db = getFirestore()
   const { currentUser } = getAuth();
-  const { getFormInfo } = useForms();
+  const [data, loading] = useDocumentData(
+    doc(db, "forms", formID) as DocumentReference<FormData>
+  );
 
-  useEffect(() => {
-    const getCreator = async () => {
-      try {
-        const creator = await getFormInfo(formID);
-        setCreatorID(creator.creatorID);
-      } catch (e) {
-        console.error("Error", e);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  if (loading) return <h1>Loading...</h1>;
 
-    getCreator();
-  }, [formID]);
-
-  if (isLoading) return <h1>Loading...</h1>;
-
-  if (currentUser?.uid !== creatorID) {
+  if (currentUser?.uid !== data?.creatorID) {
     return <Navigate to={`/form/${formID}`} />;
   }
 

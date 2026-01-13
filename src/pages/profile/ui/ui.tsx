@@ -1,29 +1,30 @@
 import { Button } from "@/shared/ui";
-import { useEffect } from "react";
 import { useForms } from "@/shared/api";
 import { FormList } from "@/widgets/form-list";
 import style from "./style.module.scss";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import {
+  collection,
+  CollectionReference,
+  getFirestore,
+  query,
+} from "firebase/firestore";
+import type { FormData } from "@/shared/model";
 
 export const Content = () => {
-  const { forms, isLoading, getAllForms, createForm } = useForms();
-
-  useEffect(() => {
-    const unsubscribe = getAllForms();
-
-    return () => {
-      if (unsubscribe) {
-        unsubscribe();
-      }
-    };
-  }, []);
+  const db = getFirestore();
+  const [data, loading] = useCollectionData(
+    query(collection(db, "forms") as CollectionReference<FormData>)
+  );
+  const { createForm } = useForms();
 
   const loadForms = () => {
-    if (isLoading) {
+    if (loading) {
       return <h1>Загрузка...</h1>;
-    } else if (forms.length === 0) {
+    } else if (data?.length === 0) {
       return <h1>У вас нету форм.</h1>;
-    } else {
-      return <FormList forms={forms} />;
+    } else if (data) {
+      return <FormList forms={data} />;
     }
   };
 

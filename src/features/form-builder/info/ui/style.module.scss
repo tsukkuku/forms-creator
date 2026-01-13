@@ -19,6 +19,12 @@
   border-bottom: 1px solid var(--input-border);
   font-size: 28px;
   font-weight: 600;
+
+  &.error {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid red;
+  }
 }
 
 .changeDescription {

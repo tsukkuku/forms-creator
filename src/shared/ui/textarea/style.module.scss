@@ -1,4 +1,9 @@
+.textareaContainer {
+  width: 100%;
+}
+
 .textarea {
+  width: 100%;
   padding: 8px 12px;
   border: 1px solid var(--input-border);
   border-radius: 8px;
@@ -6,4 +11,14 @@
   resize: vertical;
   min-height: 40px;
   max-height: 75px;
+
+  &.error {
+    border: 1px solid #dc3545;
+  }
+}
+
+.errorMessage {
+  font-size: 14px;
+  color: #dc3545;
+  margin-top: 6px;
 }

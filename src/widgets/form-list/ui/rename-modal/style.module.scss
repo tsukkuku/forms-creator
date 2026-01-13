@@ -13,6 +13,7 @@
 
 .renameForm {
   width: 100%;
+  position: relative;
 }
 
 .secondTitle {
@@ -29,4 +30,15 @@
   align-items: center;
   gap: 10px;
   margin-top: 15px;
+}
+
+.renameInput {
+  padding-right: 35px;
+}
+
+.clearInputIcon {
+  top: 5px;
+  right: 5px;
+  position: absolute;
+  cursor: pointer;
 }

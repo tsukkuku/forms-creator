@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import { Button, Input, Modal } from "@/shared/ui";
-import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useForms } from "@/shared/api";
+import { useForm } from "react-hook-form";
+import { TiDelete } from "react-icons/ti";
 import toast from "react-hot-toast";
 import style from "./style.module.scss";
+
+interface FormData {
+  formName: string;
+}
 
 interface RenameModalProps {
   isOpen: boolean;
@@ -18,46 +24,26 @@ export const RenameModal = ({
   formName,
 }: RenameModalProps) => {
   const { updateFormTitle } = useForms();
-  const [value, setValue] = useState<string>("");
-  const [disabled, setDisabled] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    reset,
+  } = useForm<FormData>({ mode: "onBlur" });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
-
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
+  const onSubmit = (value: FormData) => {
     if (!formID) return;
 
-    if (!value.trim()) {
-      setDisabled(true);
-      setError("Название формы не может быть пустым");
-      return;
-    } else if (value.length >= 100) {
-      setDisabled(true);
-      setError("Максимальное количество символов не должно превышать 100");
-      return;
-    }
-
-    updateFormTitle(formID, value.trim());
+    updateFormTitle(formID, value.formName.trim());
     onClose();
     toast.success("Форма переименована");
   };
 
   useEffect(() => {
-    if (value.trim()) {
-      setDisabled(false);
-      setError("");
+    if (isOpen) {
+      reset({ formName: formName || "" });
     }
-  }, [value]);
-
-  useEffect(() => {
-    if (formName) setValue(formName);
-    setDisabled(false);
-    setError("");
-  }, [isOpen]);
+  }, [isOpen, formName, reset]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} className={style.renameModal}>
@@ -66,21 +52,41 @@ export const RenameModal = ({
       </Modal.Header>
       <Modal.Body>
         <div className={style.secondTitle}>Введите новое название формы</div>
-        <form onSubmit={onSubmit} className={style.renameForm}>
+        <form
+          onSubmit={handleSubmit((value) => onSubmit(value))}
+          className={style.renameForm}
+        >
           <Input
-            autoFocus
-            value={value}
-            onChange={handleChange}
+            {...register("formName", {
+              required: "Поле не должно быть пустым",
+              maxLength: {
+                value: 100,
+                message:
+                  "Максимальное количество символов не должно превышать 100",
+              },
+            })}
+            defaultValue={formName}
             className={style.renameInput}
             placeholder="Введите название"
-            error={error}
+            error={errors.formName?.message}
+            endContent={
+              <TiDelete
+                className={style.clearInputIcon}
+                size={25}
+                onClick={() => reset({ formName: "" })}
+              />
+            }
           />
         </form>
         <div className={style.buttonsGroup}>
           <Button variant="outline" onClick={onClose}>
             Отмена
           </Button>
-          <Button onClick={onSubmit} disabled={disabled} type="submit">
+          <Button
+            onClick={handleSubmit((value) => onSubmit(value))}
+            disabled={!isValid}
+            type="submit"
+          >
             Переименовать
           </Button>
         </div>

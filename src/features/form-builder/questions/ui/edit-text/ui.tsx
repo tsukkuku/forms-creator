@@ -1,13 +1,12 @@
 import { Input } from "@/shared/ui";
-import {
-  useEffect,
-  useState,
-  type ChangeEvent,
-  type FormEvent,
-  type ReactNode,
-} from "react";
+import { useState, type ReactNode } from "react";
 import style from "./style.module.scss";
 import clsx from "clsx";
+import { useForm } from "react-hook-form";
+
+interface FormData {
+  text: string;
+}
 
 interface EditInputProps {
   className?: string;
@@ -25,40 +24,29 @@ export const EditText = ({
   className,
 }: EditInputProps) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [value, setValue] = useState<string>(initialValue);
-  const [error, setError] = useState<string>("");
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<FormData>();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
-
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
-    if (!value.trim()) {
-      setError("Поле ввода не может быть пустым");
-      return;
-    }
-
-    updateInfo(id, value);
+  const onSubmit = (value: FormData) => {
+    updateInfo(id, value.text.trim());
     setIsEdit(false);
   };
-
-  useEffect(() => {
-    if (value.trim()) {
-      setError("");
-    }
-  }, [value]);
 
   return (
     <div onClick={() => setIsEdit((prev) => !prev)} className={style.editText}>
       {isEdit ? (
-        <form onSubmit={onSubmit} className={clsx(style.editForm, className)}>
+        <form
+          onSubmit={handleSubmit((value) => onSubmit(value))}
+          className={clsx(style.editForm, className)}
+        >
           <Input
-            value={value}
-            onChange={handleChange}
+            {...register("text", { required: "Поле не должно быть пустым" })}
+            defaultValue={initialValue}
             onClick={(e) => e.stopPropagation()}
-            error={error}
+            error={errors.text?.message}
             autoFocus
           />
         </form>

@@ -1,25 +1,16 @@
 import { getAuth } from "firebase/auth";
-import type { FormData } from "../model";
 import {
-  collection,
   deleteDoc,
   doc,
-  getDoc,
   getFirestore,
-  onSnapshot,
-  orderBy,
-  query,
   serverTimestamp,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 export const useForms = () => {
-  const [forms, setForms] = useState<FormData[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const auth = getAuth();
   const db = getFirestore();
@@ -62,29 +53,6 @@ export const useForms = () => {
     }
   };
 
-  const getAllForms = () => {
-    try {
-      setIsLoading(true);
-      const forms = query(
-        collection(db, "forms"),
-        orderBy("createdAt", "desc")
-      );
-      const getForms = onSnapshot(forms, (q) => {
-        const res: FormData[] = [];
-        q.forEach((item) => res.push({ ...(item.data() as FormData) }));
-        setForms(res);
-        setIsLoading(false);
-      });
-
-      return getForms;
-    } catch (error) {
-      setIsLoading(false);
-      if (error instanceof Error) {
-        console.log(error.message);
-      }
-    }
-  };
-
   const deleteForm = async (id: string) => {
     try {
       await deleteDoc(doc(db, "forms", id));
@@ -112,24 +80,6 @@ export const useForms = () => {
     }
   };
 
-  const getFormInfo = async (formID: string): Promise<FormData> => {
-    try {
-      setIsLoading(true);
-      const docRef = doc(db, "forms", formID);
-      const formInfo = await getDoc(docRef);
-
-      if (formInfo.exists()) {
-        return formInfo.data() as FormData;
-      } else {
-        throw new Error("Форма не найдена");
-      }
-    } catch (e) {
-      throw e;
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const updateForm = async (formID: string, changedValues: any) => {
     try {
       const form = doc(db, "forms", formID);
@@ -147,11 +97,8 @@ export const useForms = () => {
   };
 
   return {
-    forms,
-    isLoading,
+    db,
     createForm,
-    getFormInfo,
-    getAllForms,
     deleteForm,
     updateFormTitle,
     updateForm,

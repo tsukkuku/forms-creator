@@ -6,39 +6,13 @@ import {
   doc,
   getDoc,
   getFirestore,
-  onSnapshot,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import { useState } from "react";
 
 export const useQuestion = () => {
   const db = getFirestore();
   const { id } = useAppSelector((state) => state.formID);
-  const [loading, setLoading] = useState(false);
-  const [questions, setQuestions] = useState<Question[]>([]);
-
-  const loadQuestions = () => {
-    setLoading(true);
-    const form = doc(db, "forms", id);
-
-    const unsubscribe = onSnapshot(form, (docData) => {
-      if (docData.exists()) {
-        const data = docData.data() as FormData;
-
-        const questionData = data.questions;
-
-        setQuestions(questionData);
-        setLoading(false);
-      } else {
-        setQuestions([]);
-        console.log("Форма не найдена");
-        setLoading(false);
-      }
-    });
-
-    return () => unsubscribe();
-  };
 
   const addQuestion = async () => {
     const form = doc(db, "forms", id);
@@ -108,10 +82,7 @@ export const useQuestion = () => {
   };
 
   return {
-    questions,
-    loading,
     addQuestion,
-    loadQuestions,
     deleteQuestion,
     updateQuestionName,
     updateQuestionType,

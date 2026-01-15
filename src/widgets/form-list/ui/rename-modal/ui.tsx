@@ -85,7 +85,6 @@ export const RenameModal = ({
           <Button
             onClick={handleSubmit((value) => onSubmit(value))}
             disabled={!isValid}
-            type="submit"
           >
             Переименовать
           </Button>

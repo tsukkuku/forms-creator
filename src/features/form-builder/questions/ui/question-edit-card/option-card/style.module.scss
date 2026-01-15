@@ -5,6 +5,15 @@
   align-items: center;
 }
 
+.optionCardText {
+  width: 100%;
+  display: block;
+}
+
+.optionField {
+  display: flex;
+}
+
 .optionTitle {
   font-size: 14px;
   line-height: 1.6;
@@ -19,6 +28,11 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+}
+
+.optionInfoText {
+  width: 100%;
+  display: block;
 }
 
 .optionInput {

@@ -23,6 +23,10 @@
 
 .questionTitle {
   font-size: 20px;
+  line-height: 1.6;
+  word-break: break-word;
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 .questionOptions {
@@ -43,4 +47,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.questionDesc {
+  color: var(--second-title);
+  font-size: 14px;
+  line-height: 1.6;
+  word-break: break-word;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.descriptionInput {
+  width: 300px;
+  font-size: 14px;
+}
+
+.changeType {
+  margin-left: auto;
 }

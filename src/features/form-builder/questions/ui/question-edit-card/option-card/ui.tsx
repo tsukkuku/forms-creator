@@ -6,6 +6,7 @@ import style from "./style.module.scss";
 import { MdClose } from "react-icons/md";
 import { EditText } from "../../edit-text";
 import { OptionField } from "../../option-field";
+import clsx from "clsx";
 
 interface OptionCardProps {
   type: QuestionTypes;
@@ -15,28 +16,36 @@ interface OptionCardProps {
 export const OptionCard = memo(({ type, option }: OptionCardProps) => {
   const { deleteOption, updateOptionName } = useOption();
 
+  const correctType = type === "one" || type === "many";
+
   return (
     <div className={style.optionCard}>
-      <div className={style.optionInfo}>
+      <div
+        className={clsx(correctType ? style.optionInfo : style.optionInfoText)}
+      >
         <div>
           <OptionField type={type} disabled />
         </div>
-        <EditText
-          id={option.id}
-          initialValue={option.name}
-          content={<div className={style.optionTitle}>{option.name}</div>}
-          updateInfo={updateOptionName}
-          className={style.optionInput}
-        />
+        {correctType && (
+          <EditText
+            id={option.id}
+            initialValue={option.name}
+            content={<div className={style.optionTitle}>{option.name}</div>}
+            updateInfo={updateOptionName}
+            className={style.optionInput}
+          />
+        )}
       </div>
-      <Button
-        type="button"
-        className={style.deleteOptionBtn}
-        variant="outline"
-        onClick={() => deleteOption(option.id)}
-      >
-        <MdClose size={15} />
-      </Button>
+      {correctType && (
+        <Button
+          type="button"
+          className={style.deleteOptionBtn}
+          variant="outline"
+          onClick={() => deleteOption(option.id)}
+        >
+          <MdClose size={15} />
+        </Button>
+      )}
     </div>
   );
 });

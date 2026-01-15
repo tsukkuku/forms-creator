@@ -21,6 +21,7 @@ export const useQuestion = () => {
       questions: arrayUnion({
         id: crypto.randomUUID(),
         name: "Вопрос без заголовка",
+        description: "Описание",
         type: "one",
         options: [{ id: crypto.randomUUID(), name: "Вариант 1" }],
       }),
@@ -59,6 +60,31 @@ export const useQuestion = () => {
     });
   };
 
+  const updateQuestionDescription = async (
+    questionID: string,
+    description: string
+  ) => {
+    const form = doc(db, "forms", id);
+    const formData = await getDoc(form);
+    const data = formData.data() as FormData;
+
+    const updatedQuestion = data.questions.map((question) => {
+      if (question.id === questionID) {
+        return {
+          ...question,
+          description,
+        };
+      }
+
+      return question;
+    });
+
+    await updateDoc(form, {
+      questions: updatedQuestion,
+      updateAt: serverTimestamp(),
+    });
+  };
+
   const updateQuestionType = async (questionID: string, type: string) => {
     const form = doc(db, "forms", id);
     const formData = await getDoc(form);
@@ -85,6 +111,7 @@ export const useQuestion = () => {
     addQuestion,
     deleteQuestion,
     updateQuestionName,
+    updateQuestionDescription,
     updateQuestionType,
   };
 };

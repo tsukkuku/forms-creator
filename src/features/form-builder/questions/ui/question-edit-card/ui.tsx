@@ -13,43 +13,61 @@ interface QuestionEditCardProps {
 
 export const QuestionEditCard = ({ question }: QuestionEditCardProps) => {
   const { addOption } = useOption();
-  const { deleteQuestion, updateQuestionName } = useQuestion();
+  const { deleteQuestion, updateQuestionName, updateQuestionDescription } =
+    useQuestion();
+
+  const correctType = question.type === "one" || question.type === "many";
 
   return (
     <div className={style.questionCard}>
       <div className={style.questionInfo}>
-        <div className={style.questionHeader}>
+        <div>
+          <div className={style.questionHeader}>
+            <EditText
+              id={question.id}
+              initialValue={question.name}
+              content={
+                <div className={style.questionTitle}>{question.name}</div>
+              }
+              updateInfo={updateQuestionName}
+              className={style.questionTitle}
+            />
+            <Button
+              className={style.deleteBtn}
+              variant="danger"
+              onClick={() => deleteQuestion(question)}
+            >
+              <MdDeleteOutline size={15} />
+            </Button>
+          </div>
           <EditText
             id={question.id}
-            initialValue={question.name}
-            content={<div className={style.questionTitle}>{question.name}</div>}
-            updateInfo={updateQuestionName}
-            className={style.questionTitle}
+            initialValue={question.description}
+            content={
+              <div className={style.questionDesc}>{question.description}</div>
+            }
+            updateInfo={updateQuestionDescription}
+            className={style.descriptionInput}
           />
-          <Button
-            className={style.deleteBtn}
-            variant="danger"
-            onClick={() => deleteQuestion(question)}
-          >
-            <MdDeleteOutline size={15} />
-          </Button>
         </div>
-        {question.desc && (
-          <div className={style.questionDesc}>{question.desc}</div>
-        )}
         <div className={style.questionOptions}>
           {question.options.map((option) => (
             <OptionCard option={option} type={question.type} key={option.id} />
           ))}
         </div>
         <div className={style.editQuestion}>
-          <Button
-            onClick={() => addOption(question.id)}
-            className={style.addOptionBtn}
-          >
-            Добавить вариант ответа
-          </Button>
-          <QuestionChangeType questionID={question.id} />
+          {correctType && (
+            <Button
+              onClick={() => addOption(question.id)}
+              className={style.addOptionBtn}
+            >
+              Добавить вариант ответа
+            </Button>
+          )}
+          <QuestionChangeType
+            questionID={question.id}
+            className={!correctType ? style.changeType : ""}
+          />
         </div>
       </div>
     </div>

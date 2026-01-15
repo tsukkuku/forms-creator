@@ -1,5 +1,5 @@
 import type { QuestionTypes } from "@/shared/model";
-import { Input } from "@/shared/ui";
+import { Input, Textarea } from "@/shared/ui";
 
 interface OptionFieldProps {
   type: QuestionTypes;
@@ -19,9 +19,20 @@ export const OptionField = ({
       case "many":
         return "checkbox";
       default:
-        return "radio";
+        return "text";
     }
   };
 
-  return <Input type={checkType(type)} disabled={disabled} name={name} />;
+  if (type === "long") {
+    return <Textarea placeholder="Развернутый ответ" disabled={disabled} />;
+  }
+
+  return (
+    <Input
+      type={checkType(type)}
+      disabled={disabled}
+      name={name}
+      placeholder={type === "short" ? "Краткий ответ" : ""}
+    />
+  );
 };

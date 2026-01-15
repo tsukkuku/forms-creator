@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { useQuestion } from "../../../lib";
 import { Dropdown } from "@/shared/ui";
+import clsx from "clsx";
 import style from "./style.module.scss";
 
 interface QuestionChangeTypeProps {
   questionID: string;
+  className?: string;
 }
 
-export const QuestionChangeType = ({ questionID }: QuestionChangeTypeProps) => {
+export const QuestionChangeType = ({
+  questionID,
+  className,
+}: QuestionChangeTypeProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { updateQuestionType } = useQuestion();
 
@@ -20,7 +25,7 @@ export const QuestionChangeType = ({ questionID }: QuestionChangeTypeProps) => {
   };
 
   return (
-    <div className={style.changeQuestionType}>
+    <div className={clsx(style.changeQuestionType, className)}>
       <div className={style.dropDownBtn} onClick={handleClose}>
         Тип вопроса
       </div>
@@ -36,6 +41,18 @@ export const QuestionChangeType = ({ questionID }: QuestionChangeTypeProps) => {
           onClick={() => changeQuestionType("many")}
         >
           Несколько ответов
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClose={handleClose}
+          onClick={() => changeQuestionType("short")}
+        >
+          Краткий ответ
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClose={handleClose}
+          onClick={() => changeQuestionType("long")}
+        >
+          Развернутый ответ
         </Dropdown.Item>
       </Dropdown>
     </div>

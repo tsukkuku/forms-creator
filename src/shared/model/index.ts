@@ -14,7 +14,7 @@ export interface FormData {
 export interface Question {
   id: string;
   name: string;
-  desc?: string;
+  description: string;
   type: QuestionTypes;
   options: Option[];
 }

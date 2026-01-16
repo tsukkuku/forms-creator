@@ -32,7 +32,8 @@
   font-weight: 500;
 }
 
-.creatorName {
-  font-size: 14px;
-  font-weight: 700;
+.buttonsGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

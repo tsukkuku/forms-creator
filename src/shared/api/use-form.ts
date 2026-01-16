@@ -33,6 +33,7 @@ export const useForms = () => {
         description: "Описание",
         creator: user.displayName,
         creatorID: user.uid,
+        color: "#4169E1",
         createdAt: serverTimestamp(),
         updateAt: serverTimestamp(),
         questions: [
@@ -96,11 +97,21 @@ export const useForms = () => {
     }
   };
 
+  const updateFormColor = async (formID: string, newColor: string) => {
+    const formRef = doc(db, "forms", formID);
+
+    await updateDoc(formRef, {
+      color: newColor,
+      updateAt: serverTimestamp(),
+    });
+  };
+
   return {
     db,
     createForm,
     deleteForm,
     updateFormTitle,
     updateForm,
+    updateFormColor,
   };
 };

@@ -8,6 +8,7 @@ import { Button, Input, Textarea } from "@/shared/ui";
 import toast from "react-hot-toast";
 import clsx from "clsx";
 import style from "./style.module.scss";
+import { FormColorPicker } from "./form-color-picker";
 
 interface FormDataTest {
   name: string;
@@ -37,10 +38,13 @@ export const FormHeader = () => {
   };
 
   if (loading) return <h1>Loading...</h1>;
-  if (!id) return <h1>Такой формы не существует</h1>;
+  if (!data) return <h1>Такой формы не существует</h1>;
 
   return (
-    <div className={style.formHeader}>
+    <div
+      className={style.formHeader}
+      style={{ borderTop: `15px solid ${data.color}` }}
+    >
       <div className={style.formHeaderInfo}>
         <Input
           {...register("name", { required: "Поле не должно быть пустым" })}
@@ -63,14 +67,16 @@ export const FormHeader = () => {
           error={errors.description?.message}
           placeholder="Описание"
         />
-        <div className={style.creatorName}>Создатель: {data?.creator}</div>
       </div>
-      <Button
-        onClick={handleSubmit((value) => handleSave(value))}
-        disabled={!isValid}
-      >
-        Сохранить
-      </Button>
+      <div className={style.buttonsGroup}>
+        <Button
+          onClick={handleSubmit((value) => handleSave(value))}
+          disabled={!isValid}
+        >
+          Сохранить
+        </Button>
+        <FormColorPicker formID={data.id} initialColor={data?.color} />
+      </div>
     </div>
   );
 };

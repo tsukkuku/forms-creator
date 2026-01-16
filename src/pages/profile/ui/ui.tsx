@@ -1,7 +1,6 @@
 import { Button } from "@/shared/ui";
 import { useForms } from "@/shared/api";
 import { FormList } from "@/widgets/form-list";
-import style from "./style.module.scss";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import {
   collection,
@@ -10,6 +9,7 @@ import {
   query,
 } from "firebase/firestore";
 import type { FormData } from "@/shared/model";
+import style from "./style.module.scss";
 
 export const Content = () => {
   const db = getFirestore();

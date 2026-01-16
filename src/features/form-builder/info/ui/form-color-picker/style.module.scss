@@ -1,0 +1,60 @@
+.openModalBtn {
+  background-color: transparent !important;
+  border: 1px solid #616161;
+  color: var(--text-color) !important;
+  padding: 10px 15px;
+}
+
+.colorList {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(50px, 1fr));
+  place-items: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.colorCard {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 6px;
+
+  &:hover {
+    cursor: pointer;
+
+    .colorName {
+      text-decoration: underline;
+    }
+  }
+}
+
+.colorName {
+  font-size: 14px;
+}
+
+.selectColor {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.openPicker {
+  width: 100%;
+}
+
+.colorPicker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 25px;
+}
+
+.colorInput {
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+}

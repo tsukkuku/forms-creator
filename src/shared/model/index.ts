@@ -8,6 +8,7 @@ export interface FormData {
   updateAt: Timestamp;
   creator: string;
   creatorID: string;
+  color: string;
   questions: Question[];
 }
 

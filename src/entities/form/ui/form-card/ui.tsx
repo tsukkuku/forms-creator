@@ -26,7 +26,11 @@ export const FormCard = ({ form, onRename, onDelete }: FormCardProps) => {
   };
 
   return (
-    <Link to={accessControl(form.id, form.creatorID)} className={style.link}>
+    <Link
+      to={accessControl(form.id, form.creatorID)}
+      className={style.link}
+      style={{ borderTop: `10px solid ${form?.color}` }}
+    >
       <div className={style.formInfo}>
         <div className={style.formName}>{form.name}</div>
         <div className={style.formDesc}>{form.description}</div>

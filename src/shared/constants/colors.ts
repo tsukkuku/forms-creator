@@ -1,0 +1,18 @@
+export const COLORS = [
+  { name: "Красный", hexColor: "#db4437" },
+  { name: "Бордовый", hexColor: "#800020" },
+  { name: "Бирюзовый", hexColor: "#00bcd4" },
+  { name: "Оранжевый", hexColor: "#ff9800" },
+  { name: "Фиолетовый", hexColor: "#673ab7" },
+  { name: "Зеленый", hexColor: "#4caf50" },
+  { name: "Светло-синий", hexColor: "#03a0f4" },
+  { name: "Белый", hexColor: "#ffffff" },
+  { name: "Черный", hexColor: "#000000" },
+  { name: "Мятный", hexColor: "#4DB6AC" },
+  { name: "Коралловый", hexColor: "#FF7F50" },
+  { name: "Лавандовый", hexColor: "#E6E6FA" },
+  { name: "Терракотовый", hexColor: "#E2725B" },
+  { name: "Сливовый", hexColor: "#DDA0DD" },
+  { name: "Оливковый", hexColor: "#808000" },
+  { name: "Индиго", hexColor: "#4B0082" },
+];

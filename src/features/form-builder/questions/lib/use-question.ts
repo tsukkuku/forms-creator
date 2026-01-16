@@ -85,24 +85,31 @@ export const useQuestion = () => {
     });
   };
 
-  const updateQuestionType = async (questionID: string, type: string) => {
-    const form = doc(db, "forms", id);
-    const formData = await getDoc(form);
+  const updateQuestionTypeAndReset = async (
+    questionID: string,
+    type: string
+  ) => {
+    const formRef = doc(db, "forms", id);
+    const formData = await getDoc(formRef);
     const data = formData.data() as FormData;
 
-    const updatedQuestion = data.questions.map((question) => {
-      if (question.id === questionID) {
+    const updatedQuestions = data.questions.map((item) => {
+      if (item.id === questionID) {
+        const shouldReset = type === "short" || type === "long";
+
         return {
-          ...question,
+          ...item,
           type,
+          options: shouldReset
+            ? [{ id: crypto.randomUUID(), name: "Вариант 1" }]
+            : item.options,
         };
       }
-
-      return question;
+      return item;
     });
 
-    await updateDoc(form, {
-      questions: updatedQuestion,
+    await updateDoc(formRef, {
+      questions: updatedQuestions,
       updateAt: serverTimestamp(),
     });
   };
@@ -111,7 +118,7 @@ export const useQuestion = () => {
     addQuestion,
     deleteQuestion,
     updateQuestionName,
-    updateQuestionType,
     updateQuestionDescription,
+    updateQuestionTypeAndReset,
   };
 };

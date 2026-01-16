@@ -14,14 +14,14 @@ export const QuestionChangeType = ({
   className,
 }: QuestionChangeTypeProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { updateQuestionType } = useQuestion();
+  const { updateQuestionTypeAndReset } = useQuestion();
 
   const handleClose = () => {
     setIsOpen((prev) => !prev);
   };
 
   const changeQuestionType = (type: string) => {
-    updateQuestionType(questionID, type);
+    updateQuestionTypeAndReset(questionID, type);
   };
 
   return (

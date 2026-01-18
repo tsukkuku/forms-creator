@@ -1,6 +1,6 @@
 import { useState, type MouseEvent } from "react";
 import { Link } from "react-router-dom";
-import { accessControl, formatDate } from "../../lib";
+import { accessControl, creatorCheck, formatDate } from "../../lib";
 import type { FormData } from "@/shared/model";
 import { MdAccessTimeFilled, MdEdit } from "react-icons/md";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
@@ -48,17 +48,26 @@ export const FormCard = ({ form, onRename, onDelete }: FormCardProps) => {
               <span>{formatDate("update", form.updateAt)}</span>
             </div>
           )}
-          <div className={style.settingsIcon} onClick={openDropDown}>
-            <PiDotsThreeOutlineVerticalFill size={18} />
-          </div>
-          <Dropdown isOpen={isOpen} onClose={handleOpen} top={35} right={10}>
-            <Dropdown.Item onClose={handleOpen} onClick={onRename}>
-              Переименовать
-            </Dropdown.Item>
-            <Dropdown.Item onClose={handleOpen} onClick={onDelete}>
-              Удалить
-            </Dropdown.Item>
-          </Dropdown>
+          {creatorCheck(form.creatorID) && (
+            <>
+              <div className={style.settingsIcon} onClick={openDropDown}>
+                <PiDotsThreeOutlineVerticalFill size={18} />
+              </div>
+              <Dropdown
+                isOpen={isOpen}
+                onClose={handleOpen}
+                top={35}
+                right={10}
+              >
+                <Dropdown.Item onClose={handleOpen} onClick={onRename}>
+                  Переименовать
+                </Dropdown.Item>
+                <Dropdown.Item onClose={handleOpen} onClick={onDelete}>
+                  Удалить
+                </Dropdown.Item>
+              </Dropdown>
+            </>
+          )}
         </div>
       </div>
     </Link>

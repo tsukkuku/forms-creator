@@ -10,6 +10,7 @@ interface DropdownProps {
   top?: number;
   left?: number;
   right?: number;
+  bottom?: number;
 }
 
 export const Dropdown = ({
@@ -18,6 +19,7 @@ export const Dropdown = ({
   top,
   left,
   right,
+  bottom,
   children,
 }: PropsWithChildren<DropdownProps>) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -48,7 +50,12 @@ export const Dropdown = ({
     <div
       className={clsx(style.dropDown, isOpen && style.active)}
       ref={ref}
-      style={{ top: `${top}px`, left: `${left}px`, right: `${right}px` }}
+      style={{
+        top: `${top}px`,
+        left: `${left}px`,
+        right: `${right}px`,
+        bottom: `${bottom}px`,
+      }}
       data-testid="dropdown"
     >
       {isVisible && <div className={style.dropDownContent}>{children}</div>}

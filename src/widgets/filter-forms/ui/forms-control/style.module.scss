@@ -1,0 +1,19 @@
+.profileHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.createBtn {
+  font-size: 14px;
+  padding: 15px 20px;
+}
+
+.sortedButtons {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}

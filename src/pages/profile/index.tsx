@@ -1,10 +1,10 @@
-import { Content } from "./ui/ui";
+import { Forms } from "./ui/forms";
 import { ProtectedRoute } from "@/features/login";
 
 const Profile = () => {
   return (
     <ProtectedRoute>
-      <Content />
+      <Forms />
     </ProtectedRoute>
   );
 };

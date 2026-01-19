@@ -1,0 +1,64 @@
+import type { Question } from "@/shared/model";
+import { FormQuestionCard } from "./form-card";
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { Button } from "@/shared/ui";
+import { useForms } from "@/shared/api";
+import { getAuth } from "firebase/auth";
+import style from "./style.module.scss";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
+interface FormQuestionList {
+  questions: Question[];
+  formName: string;
+  formID: string;
+}
+
+export const FormQuestionList = ({
+  formID,
+  formName,
+  questions,
+}: FormQuestionList) => {
+  const navigate = useNavigate();
+  const { currentUser } = getAuth();
+  const { sendAnswers } = useForms();
+
+  const methods = useForm({
+    defaultValues: {
+      answers: questions.map((question) => ({
+        questionID: question.id,
+        questionName: question.name,
+        value: "",
+      })),
+    },
+  });
+
+  const { control } = methods;
+  const { fields } = useFieldArray({ control, name: "answers" });
+
+  const onSubmit = (data: any) => {
+    sendAnswers(formName, formID, currentUser!, data);
+    navigate("/me");
+    toast.success("Ответы успешно отправлены!");
+  };
+
+  return (
+    <FormProvider {...methods}>
+      <form
+        className={style.formQuestionList}
+        onSubmit={methods.handleSubmit((value) => onSubmit(value))}
+      >
+        {fields.map((field, index) => (
+          <FormQuestionCard
+            question={questions[index]}
+            key={field.id}
+            index={index}
+          />
+        ))}
+        <Button type="submit" className={style.sendBtn}>
+          Отправить
+        </Button>
+      </form>
+    </FormProvider>
+  );
+};

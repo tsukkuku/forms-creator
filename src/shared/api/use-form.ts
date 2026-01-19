@@ -1,7 +1,9 @@
-import { getAuth } from "firebase/auth";
+import { getAuth, type User } from "firebase/auth";
 import {
+  arrayUnion,
   deleteDoc,
   doc,
+  getDoc,
   getFirestore,
   serverTimestamp,
   setDoc,
@@ -9,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import type { AnswerData } from "../model";
 
 export const useForms = () => {
   const navigate = useNavigate();
@@ -57,7 +60,6 @@ export const useForms = () => {
   const deleteForm = async (id: string) => {
     try {
       await deleteDoc(doc(db, "forms", id));
-      console.log("Форма успешна удалена!", id);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
@@ -106,6 +108,42 @@ export const useForms = () => {
     });
   };
 
+  const sendAnswers = async (
+    formName: string,
+    formID: string,
+    user: User,
+    answers: AnswerData,
+  ) => {
+    const answerRef = doc(db, "answers", formID);
+
+    const docSnap = await getDoc(answerRef);
+
+    if (docSnap.exists()) {
+      await updateDoc(answerRef, {
+        answers: arrayUnion({
+          userID: user.uid,
+          username: user.displayName,
+          userPhotoUrl: user.photoURL,
+          userAnswers: answers,
+        }),
+      });
+    } else {
+      await setDoc(answerRef, {
+        id: formID,
+        name: `Ответы пользователей для формы ${formName}`,
+        createdAt: serverTimestamp(),
+        answers: [
+          {
+            userID: user.uid,
+            username: user.displayName,
+            userPhotoUrl: user.photoURL,
+            userAnswers: answers,
+          },
+        ],
+      });
+    }
+  };
+
   return {
     db,
     createForm,
@@ -113,5 +151,6 @@ export const useForms = () => {
     updateFormTitle,
     updateForm,
     updateFormColor,
+    sendAnswers,
   };
 };

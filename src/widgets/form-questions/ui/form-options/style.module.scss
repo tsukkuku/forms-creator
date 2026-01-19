@@ -1,0 +1,19 @@
+.optionCard {
+  width: 100%;
+}
+
+.optionInfo {
+  max-width: 850px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.optionInfoText {
+  width: 100%;
+  display: block;
+}
+
+.optionName {
+  font-size: 14px;
+}

@@ -26,3 +26,24 @@ export interface Option {
 }
 
 export type QuestionTypes = "one" | "many" | "short" | "long";
+
+export interface FormAnswers {
+  id: string;
+  name: string;
+  createdAt: Timestamp;
+  answers: Answer[];
+}
+
+export interface Answer {
+  username: string;
+  userID: string;
+  userAnswers: AnswerData;
+}
+
+export interface AnswerData {
+  answers: {
+    questionID: string;
+    questionName: string;
+    value: string | string[];
+  }[];
+}

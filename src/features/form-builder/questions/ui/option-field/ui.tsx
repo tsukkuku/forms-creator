@@ -1,14 +1,17 @@
 import type { QuestionTypes } from "@/shared/model";
 import { Input, Textarea } from "@/shared/ui";
+import type { UseFormRegisterReturn } from "react-hook-form";
 
 interface OptionFieldProps {
   type: QuestionTypes;
   disabled?: boolean;
-  name?: string;
+  registerProps?: UseFormRegisterReturn;
+  value?: string;
 }
 
 export const OptionField = ({
-  name,
+  registerProps,
+  value,
   type,
   disabled = false,
 }: OptionFieldProps) => {
@@ -24,15 +27,22 @@ export const OptionField = ({
   };
 
   if (type === "long") {
-    return <Textarea placeholder="Развернутый ответ" disabled={disabled} />;
+    return (
+      <Textarea
+        placeholder="Развернутый ответ"
+        disabled={disabled}
+        {...registerProps}
+      />
+    );
   }
 
   return (
     <Input
       type={checkType(type)}
       disabled={disabled}
-      name={name}
+      value={value}
       placeholder={type === "short" ? "Краткий ответ" : ""}
+      {...registerProps}
     />
   );
 };

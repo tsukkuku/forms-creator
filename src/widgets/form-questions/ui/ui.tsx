@@ -4,9 +4,9 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/shared/ui";
 import { useForms } from "@/shared/api";
 import { getAuth } from "firebase/auth";
-import style from "./style.module.scss";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import style from "./style.module.scss";
 
 interface FormQuestionList {
   questions: Question[];
@@ -37,6 +37,11 @@ export const FormQuestionList = ({
   const { fields } = useFieldArray({ control, name: "answers" });
 
   const onSubmit = (data: any) => {
+    if (!currentUser) {
+      toast.error("Войдите в аккаунт, чтобы отправить ответ");
+      throw new Error("Пользователь не авторизован");
+    }
+
     sendAnswers(formName, formID, currentUser!, data);
     navigate("/me");
     toast.success("Ответы успешно отправлены!");
@@ -55,9 +60,19 @@ export const FormQuestionList = ({
             index={index}
           />
         ))}
-        <Button type="submit" className={style.sendBtn}>
-          Отправить
-        </Button>
+        <div className={style.buttonGroups}>
+          <Button type="submit" className={style.sendBtn}>
+            Отправить
+          </Button>
+          <Button
+            type="button"
+            className={style.sendBtn}
+            variant="outline"
+            onClick={() => methods.reset()}
+          >
+            Очистить форму
+          </Button>
+        </div>
       </form>
     </FormProvider>
   );

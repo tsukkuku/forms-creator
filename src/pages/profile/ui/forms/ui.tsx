@@ -5,8 +5,10 @@ import {
   collection,
   CollectionReference,
   getFirestore,
+  or,
   orderBy,
   query,
+  where,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useMemo, useState } from "react";
@@ -20,40 +22,53 @@ export const Forms = () => {
   const [filterCategory, setFilterCategory] = useState("all");
   const [sortCategory, setSortCategory] = useState("updateAt");
 
-  const [data, loading] = useCollectionData(
-    query(
-      collection(db, "forms") as CollectionReference<FormData>,
-      orderBy(sortCategory, `${sortCategory === "name" ? "asc" : "desc"}`),
-    ),
-  );
-
-  const filteredForms = useMemo(() => {
-    if (!data) return [];
-
-    if (filterCategory === "all") {
-      return data;
-    }
+  const formsQuery = useMemo(() => {
+    const baseRef = collection(db, "forms") as CollectionReference<FormData>;
+    const orderConstraint = orderBy(
+      sortCategory,
+      sortCategory === "name" ? "asc" : "desc",
+    );
 
     if (filterCategory === "my") {
-      return data.filter((form) => form.creatorID === currentUser?.uid);
+      return query(
+        baseRef,
+        where("creatorID", "==", currentUser?.uid),
+        orderConstraint,
+      );
+    }
+
+    if (filterCategory === "all") {
+      return query(
+        baseRef,
+        or(
+          where("lookedUsers", "array-contains", currentUser?.uid),
+          where("creatorID", "==", currentUser?.uid),
+        ),
+        orderConstraint,
+      );
     }
 
     if (filterCategory === "other") {
-      return data.filter((form) => form.creatorID !== currentUser?.uid);
+      return query(
+        baseRef,
+        where("lookedUsers", "array-contains", currentUser?.uid),
+        where("creatorID", "!=", currentUser?.uid),
+        orderConstraint,
+      );
     }
 
-    return data;
-  }, [data, filterCategory, currentUser]);
+    return query(baseRef, orderConstraint);
+  }, [currentUser, filterCategory, sortCategory]);
+
+  const [data, loading] = useCollectionData(formsQuery);
 
   const loadForms = () => {
     if (loading) {
       return <h1>Загрузка...</h1>;
     } else if (data?.length === 0) {
       return <h1>У вас нету форм.</h1>;
-    } else if (filteredForms.length === 0) {
-      return <h1>Формы не найдены</h1>;
-    } else {
-      return <FormList forms={filteredForms} />;
+    } else if (data) {
+      return <FormList forms={data} />;
     }
   };
 

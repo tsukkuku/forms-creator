@@ -9,6 +9,7 @@ export interface FormData {
   creator: string;
   creatorID: string;
   color: string;
+  lookedUsers: string[];
   questions: Question[];
 }
 

@@ -37,6 +37,7 @@ export const useForms = () => {
         creator: user.displayName,
         creatorID: user.uid,
         color: "#4169E1",
+        lookedUsers: [],
         createdAt: serverTimestamp(),
         updateAt: serverTimestamp(),
         questions: [
@@ -144,6 +145,16 @@ export const useForms = () => {
     }
   };
 
+  const recordUser = async (formID: string) => {
+    const formRef = doc(db, "forms", formID);
+
+    if (auth.currentUser) {
+      await updateDoc(formRef, {
+        lookedUsers: arrayUnion(auth.currentUser?.uid),
+      });
+    }
+  };
+
   return {
     db,
     createForm,
@@ -152,5 +163,6 @@ export const useForms = () => {
     updateForm,
     updateFormColor,
     sendAnswers,
+    recordUser,
   };
 };

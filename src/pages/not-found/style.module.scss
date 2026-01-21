@@ -1,0 +1,22 @@
+.notFoundPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  min-height: 100vh;
+}
+
+.text {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.title {
+  font-size: 64px;
+  font-weight: 700;
+}
+
+.paragraph {
+  font-size: 24px;
+}

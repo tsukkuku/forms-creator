@@ -6,6 +6,7 @@ const Home = lazy(() => import("@/pages/home"));
 const Profile = lazy(() => import("@/pages/profile"));
 const EditFormPage = lazy(() => import("@/pages/edit-form"));
 const FormPage = lazy(() => import("@/pages/form"));
+const NotFoundPage = lazy(() => import("@/pages/not-found"));
 
 export const router = createBrowserRouter([
   {
@@ -18,4 +19,5 @@ export const router = createBrowserRouter([
       { path: "/form/:id", Component: FormPage },
     ],
   },
+  { path: "*", Component: NotFoundPage },
 ]);

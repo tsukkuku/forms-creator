@@ -3,6 +3,7 @@ import { useState, type ReactNode } from "react";
 import style from "./style.module.scss";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
+import { GrEdit } from "react-icons/gr";
 
 interface FormData {
   text: string;
@@ -51,7 +52,10 @@ export const EditText = ({
           />
         </form>
       ) : (
-        content
+        <div className={style.editTextContent}>
+          {content}
+          <GrEdit className={style.editIcon} size={12} />
+        </div>
       )}
     </div>
   );

@@ -3,6 +3,8 @@ import { Button, Dropdown } from "@/shared/ui";
 import { GoPlus } from "react-icons/go";
 import { useState } from "react";
 import style from "./style.module.scss";
+import { BsFilterLeft } from "react-icons/bs";
+import { FaSortAlphaDown } from "react-icons/fa";
 
 interface FormsControlProps {
   onChangeFilter: (category: string) => void;
@@ -35,7 +37,9 @@ export const FormsControl = ({
         <span>Создать новую форму</span>
       </Button>
       <div className={style.sortedButtons}>
-        <Button onClick={handleOpenFilter}>Фильтрация</Button>
+        <Button onClick={handleOpenFilter} className={style.createBtn}>
+          <BsFilterLeft size={18} /> Фильтрация
+        </Button>
         <Dropdown
           isOpen={filterOpen}
           onClose={handleOpenFilter}
@@ -61,7 +65,10 @@ export const FormsControl = ({
             Владелец не я
           </Dropdown.Item>
         </Dropdown>
-        <Button onClick={handleOpenSorted}>Сортировка</Button>
+        <Button onClick={handleOpenSorted} className={style.createBtn}>
+          <FaSortAlphaDown size={18} />
+          Сортировка
+        </Button>
         <Dropdown
           isOpen={sortOpen}
           onClose={handleOpenSorted}

@@ -44,6 +44,7 @@ export const useForms = () => {
           {
             id: crypto.randomUUID(),
             name: "Вопрос без названия",
+            description: "Описание",
             type: "one",
             options: [{ id: crypto.randomUUID(), name: "Вариант 1" }],
           },

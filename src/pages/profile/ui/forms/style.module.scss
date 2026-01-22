@@ -12,3 +12,10 @@
   justify-content: center;
   align-items: center;
 }
+
+.loading {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(340px, 1fr));
+  place-items: center;
+  gap: 20px;
+}

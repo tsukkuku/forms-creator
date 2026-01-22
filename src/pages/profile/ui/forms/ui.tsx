@@ -14,6 +14,7 @@ import { getAuth } from "firebase/auth";
 import { useMemo, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import style from "./style.module.scss";
+import { FormCardSkeleton } from "@/entities/form";
 
 export const Forms = () => {
   const db = getFirestore();
@@ -64,7 +65,13 @@ export const Forms = () => {
 
   const loadForms = () => {
     if (loading) {
-      return <h1>Загрузка...</h1>;
+      return (
+        <div className={style.loading}>
+          {[0, 1, 2, 3].map((item) => (
+            <FormCardSkeleton key={item} />
+          ))}
+        </div>
+      );
     } else if (data?.length === 0) {
       return <h1>У вас нету форм.</h1>;
     } else if (data) {

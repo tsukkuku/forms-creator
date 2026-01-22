@@ -4,10 +4,19 @@ import { FormHeader, QuestionsList, saveID } from "@/features/form-builder";
 import { useEffect } from "react";
 import { useAppDispatch } from "@/shared/lib";
 import style from "./style.module.scss";
+import { useDocumentData } from "react-firebase-hooks/firestore";
+import { doc, DocumentReference, getFirestore } from "firebase/firestore";
+import type { FormData } from "@/shared/model";
+import { FormPageSkeleton } from "@/widgets/form-skeletons";
 
 const EditFormPage = () => {
-  const { id } = useParams();
+  const db = getFirestore();
+  const { id = "" } = useParams();
   const dispatch = useAppDispatch();
+
+  const [data, loading] = useDocumentData(
+    doc(db, "forms", id) as DocumentReference<FormData>,
+  );
 
   useEffect(() => {
     if (id) {
@@ -15,11 +24,14 @@ const EditFormPage = () => {
     }
   }, []);
 
+  if (loading) return <FormPageSkeleton />;
+  if (!data) return <h1>Такой формы не существует</h1>;
+
   return (
     <ProtectedEditRoute formID={id!}>
       <section className={style.editFormPage}>
-        <FormHeader />
-        <QuestionsList />
+        <FormHeader data={data}/>
+        <QuestionsList data={data}/>
       </section>
     </ProtectedEditRoute>
   );

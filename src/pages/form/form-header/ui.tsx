@@ -2,14 +2,13 @@ import type { FormData } from "@/shared/model";
 import style from "./style.module.scss";
 import { useLogin } from "@/features/login";
 import { Button } from "@/shared/ui";
-import { ClipLoader } from "react-spinners";
 
 interface FormInfoProps {
   form: FormData;
 }
 
 export const FormHeader = ({ form }: FormInfoProps) => {
-  const { user, isLoading, handleLogin } = useLogin();
+  const { user, handleLogin } = useLogin();
 
   return (
     <div
@@ -28,7 +27,7 @@ export const FormHeader = ({ form }: FormInfoProps) => {
           </div>
         ) : (
           <Button onClick={handleLogin} style={{ marginBottom: "5px" }}>
-            {isLoading ? <ClipLoader /> : "Войти"}
+            Войти
           </Button>
         )}
       </div>

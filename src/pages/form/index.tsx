@@ -7,6 +7,7 @@ import { FormQuestionList } from "@/widgets/form-questions";
 import style from "./style.module.scss";
 import { useForms } from "@/shared/api";
 import { useEffect } from "react";
+import { FormPageSkeleton } from "@/widgets/form-skeletons";
 
 const FormPage = () => {
   const { id = "" } = useParams();
@@ -19,10 +20,10 @@ const FormPage = () => {
   const { recordUser } = useForms();
 
   useEffect(() => {
-    recordUser(id)
-  }, [])
+    recordUser(id);
+  }, []);
 
-  if (loading) return <h1>Loading</h1>;
+  if (loading) return <FormPageSkeleton />;
   if (error) return <h2>Ошибка при загрузке формы {error.message}</h2>;
   if (!data) return <h2>Такой формы не существует</h2>;
 

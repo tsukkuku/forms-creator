@@ -1,7 +1,5 @@
 import { useForms } from "@/shared/api";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDocumentData } from "react-firebase-hooks/firestore";
-import { doc, DocumentReference } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import type { FormData } from "@/shared/model";
 import { useForm } from "react-hook-form";
 import { Button, Input, Textarea } from "@/shared/ui";
@@ -15,30 +13,27 @@ interface FormDataTest {
   description: string;
 }
 
-export const FormHeader = () => {
-  const { id = "" } = useParams();
+interface FomrHeader {
+  data: FormData;
+}
+
+export const FormHeader = ({ data }: FomrHeader) => {
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
   } = useForm<FormDataTest>({ mode: "onBlur" });
 
-  const { db, updateForm } = useForms();
-  const [data, loading] = useDocumentData(
-    doc(db, "forms", id) as DocumentReference<FormData>
-  );
+  const { updateForm } = useForms();
   const navigate = useNavigate();
 
   const handleSave = async (value: FormDataTest) => {
-    if (id) {
-      await updateForm(id, value);
+    if (data.id) {
+      await updateForm(data.id, value);
       toast.success("Данные формы успешно обновлены!");
       navigate("/me");
     }
   };
-
-  if (loading) return <h1>Loading...</h1>;
-  if (!data) return <h1>Такой формы не существует</h1>;
 
   return (
     <div

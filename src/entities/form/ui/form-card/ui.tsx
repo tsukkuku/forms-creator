@@ -59,6 +59,12 @@ export const FormCard = ({ form, onRename, onDelete }: FormCardProps) => {
                 top={35}
                 right={10}
               >
+                <Dropdown.Link
+                  onClose={handleOpen}
+                  path={`/form/${form.id}/answers`}
+                >
+                  Просмотреть ответы
+                </Dropdown.Link>
                 <Dropdown.Item onClose={handleOpen} onClick={onRename}>
                   Переименовать
                 </Dropdown.Item>

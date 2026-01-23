@@ -38,6 +38,7 @@ export interface FormAnswers {
 export interface Answer {
   username: string;
   userID: string;
+  userPhotoUrl: string;
   userAnswers: AnswerData;
 }
 
@@ -45,6 +46,7 @@ export interface AnswerData {
   answers: {
     questionID: string;
     questionName: string;
+    questionDescription: string;
     value: string | string[];
   }[];
 }

@@ -1,1 +1,0 @@
-export { ProtectedEditRoute } from "./ui";

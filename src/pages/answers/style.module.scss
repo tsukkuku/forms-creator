@@ -1,0 +1,55 @@
+.answersPage {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+}
+
+.formName {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.userList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.userCard {
+  padding-bottom: 10px;
+  width: 100%;
+  max-width: 800px;
+  border-bottom: 1px solid var(--input-border);
+}
+
+.link {
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userAvatar {
+  width: 35px;
+  height: 35px;
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.linkBtn {
+  padding: 8px 20px;
+}

@@ -1,0 +1,72 @@
+.userAnswersPage {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+}
+
+.pageHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userInfo {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 15px;
+}
+
+.userAvatar {
+  width: 70px;
+  height: 70px;
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+.username {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.answerList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 25px;
+}
+
+.answerCard {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.questionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.questionName {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.questionDescription {
+  color: var(--second-title);
+}
+
+.answer {
+  font-size: 16px;
+}

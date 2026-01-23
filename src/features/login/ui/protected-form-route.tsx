@@ -10,14 +10,14 @@ interface ProtectedEditRouteProps {
   children: ReactNode;
 }
 
-export const ProtectedEditRoute = ({
+export const ProtectedFormRoute = ({
   formID,
   children,
 }: ProtectedEditRouteProps) => {
-  const db = getFirestore()
+  const db = getFirestore();
   const { currentUser } = getAuth();
   const [data, loading] = useDocumentData(
-    doc(db, "forms", formID) as DocumentReference<FormData>
+    doc(db, "forms", formID) as DocumentReference<FormData>,
   );
 
   if (loading) return <h1>Loading...</h1>;

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type PropsWithChildren } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import style from "./style.module.scss";
 
@@ -86,13 +86,20 @@ Dropdown.Link = ({
   onClose,
   children,
 }: PropsWithChildren<{ path: string; onClose: () => void }>) => {
+  const navigate = useNavigate();
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate(path);
+    onClose();
+  };
+
   return (
-    <Link
-      to={path}
+    <div
       className={clsx(style.dropDownItem, style.dropDownItemLink)}
-      onClick={onClose}
+      onClick={handleClick}
     >
       {children}
-    </Link>
+    </div>
   );
 };

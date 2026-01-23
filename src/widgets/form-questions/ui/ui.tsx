@@ -28,6 +28,7 @@ export const FormQuestionList = ({
       answers: questions.map((question) => ({
         questionID: question.id,
         questionName: question.name,
+        questionDescription: question.description,
         value: "",
       })),
     },
@@ -36,13 +37,13 @@ export const FormQuestionList = ({
   const { control } = methods;
   const { fields } = useFieldArray({ control, name: "answers" });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     if (!currentUser) {
       toast.error("Войдите в аккаунт, чтобы отправить ответ");
       throw new Error("Пользователь не авторизован");
     }
 
-    sendAnswers(formName, formID, currentUser!, data);
+    await sendAnswers(formName, formID, currentUser!, data);
     navigate("/me");
     toast.success("Ответы успешно отправлены!");
   };

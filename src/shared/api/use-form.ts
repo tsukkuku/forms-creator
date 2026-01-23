@@ -43,7 +43,7 @@ export const useForms = () => {
         questions: [
           {
             id: crypto.randomUUID(),
-            name: "Вопрос без названия",
+            name: "Вопрос без заголовка",
             description: "Описание",
             type: "one",
             options: [{ id: crypto.randomUUID(), name: "Вариант 1" }],

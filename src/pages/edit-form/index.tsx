@@ -1,4 +1,3 @@
-import { ProtectedEditRoute } from "./ui/protected-edit-route";
 import { useParams } from "react-router-dom";
 import { FormHeader, QuestionsList, saveID } from "@/features/form-builder";
 import { useEffect } from "react";
@@ -8,6 +7,7 @@ import { useDocumentData } from "react-firebase-hooks/firestore";
 import { doc, DocumentReference, getFirestore } from "firebase/firestore";
 import type { FormData } from "@/shared/model";
 import { FormPageSkeleton } from "@/widgets/form-skeletons";
+import { ProtectedFormRoute } from "@/features/login";
 
 const EditFormPage = () => {
   const db = getFirestore();
@@ -28,12 +28,12 @@ const EditFormPage = () => {
   if (!data) return <h1>Такой формы не существует</h1>;
 
   return (
-    <ProtectedEditRoute formID={id!}>
+    <ProtectedFormRoute formID={id!}>
       <section className={style.editFormPage}>
-        <FormHeader data={data}/>
-        <QuestionsList data={data}/>
+        <FormHeader data={data} />
+        <QuestionsList data={data} />
       </section>
-    </ProtectedEditRoute>
+    </ProtectedFormRoute>
   );
 };
 

@@ -1,10 +1,12 @@
-import type { Question } from "@/shared/model";
+import type { FormAnswers, Question } from "@/shared/model";
 import { FormQuestionCard } from "./form-card";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/shared/ui";
 import { useForms } from "@/shared/api";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useDocumentData } from "react-firebase-hooks/firestore";
+import { doc, DocumentReference, getFirestore } from "firebase/firestore";
 import toast from "react-hot-toast";
 import style from "./style.module.scss";
 
@@ -20,8 +22,17 @@ export const FormQuestionList = ({
   questions,
 }: FormQuestionList) => {
   const navigate = useNavigate();
+  const db = getFirestore();
   const { currentUser } = getAuth();
   const { sendAnswers } = useForms();
+
+  const [data] = useDocumentData(
+    doc(db, "answers", formID) as DocumentReference<FormAnswers>,
+  );
+
+  const userInfo = data?.answers.find(
+    (user) => user.userID === currentUser?.uid,
+  );
 
   const methods = useForm({
     defaultValues: {
@@ -41,6 +52,11 @@ export const FormQuestionList = ({
     if (!currentUser) {
       toast.error("Войдите в аккаунт, чтобы отправить ответ");
       throw new Error("Пользователь не авторизован");
+    }
+
+    if (userInfo) {
+      toast.error("Вы уже отправляли ответ на данную форму");
+      throw new Error("Пользователь уже отправлял ответ на данную форму");
     }
 
     await sendAnswers(formName, formID, currentUser!, data);

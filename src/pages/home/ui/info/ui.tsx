@@ -28,7 +28,7 @@ export const Info = () => {
               )
             }
           >
-            Войти
+            {!!user ? "Вы уже авторизованы" : "Войти"}
           </Button>
           <Button
             variant="outline"

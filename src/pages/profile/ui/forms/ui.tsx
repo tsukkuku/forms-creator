@@ -73,7 +73,7 @@ export const Forms = () => {
         </div>
       );
     } else if (data?.length === 0) {
-      return <h1>У вас нету форм.</h1>;
+      return <h1 className={style.notFoundMsg}>У вас нету форм.</h1>;
     } else if (data) {
       return <FormList forms={data} />;
     }

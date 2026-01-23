@@ -24,7 +24,7 @@ export const GetStarted = () => {
             )
           }
         >
-          Войти
+          {!!user ? "Вы уже авторизованы" : "Войти"}
         </Button>
         <Button
           variant="outline"

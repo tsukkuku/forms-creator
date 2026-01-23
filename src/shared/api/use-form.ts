@@ -72,9 +72,13 @@ export const useForms = () => {
   const updateFormTitle = async (formID: string, newName: string) => {
     try {
       const formTitle = doc(db, "forms", formID);
+      const formRef = doc(db, "answers", formID);
       await updateDoc(formTitle, {
         name: newName,
         updateAt: serverTimestamp(),
+      });
+      await updateDoc(formRef, {
+        name: `Ответы пользователей формы ${newName}`,
       });
     } catch (error) {
       if (error instanceof Error) {
@@ -132,7 +136,7 @@ export const useForms = () => {
     } else {
       await setDoc(answerRef, {
         id: formID,
-        name: `Ответы пользователей для формы ${formName}`,
+        name: `Ответы пользователей формы ${formName}`,
         createdAt: serverTimestamp(),
         answers: [
           {

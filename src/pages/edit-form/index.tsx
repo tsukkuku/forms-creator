@@ -8,6 +8,7 @@ import { doc, DocumentReference, getFirestore } from "firebase/firestore";
 import type { FormData } from "@/shared/model";
 import { FormPageSkeleton } from "@/widgets/form-skeletons";
 import { ProtectedFormRoute } from "@/features/login";
+import { ErrorMessage } from "@/shared/ui";
 
 const EditFormPage = () => {
   const db = getFirestore();
@@ -25,7 +26,7 @@ const EditFormPage = () => {
   }, []);
 
   if (loading) return <FormPageSkeleton />;
-  if (!data) return <h1>Такой формы не существует</h1>;
+  if (!data) return <ErrorMessage>Такой формы не существует</ErrorMessage>;
 
   return (
     <ProtectedFormRoute formID={id!}>

@@ -3,7 +3,7 @@ import type { FormAnswers } from "@/shared/model";
 import { doc, DocumentReference, getFirestore } from "firebase/firestore";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { Link, useParams } from "react-router-dom";
-import { Button } from "@/shared/ui";
+import { Button, ErrorMessage } from "@/shared/ui";
 import style from "./style.module.scss";
 
 const AnswersPage = () => {
@@ -14,7 +14,7 @@ const AnswersPage = () => {
   );
 
   if (loading) return <h1>Loading...</h1>;
-  if (!data) return <h1>Пока что ответы отсутствуют :(</h1>;
+  if (!data) return <ErrorMessage>Пока что ответы отсутствуют :(</ErrorMessage>;
 
   return (
     <ProtectedFormRoute formID={id}>

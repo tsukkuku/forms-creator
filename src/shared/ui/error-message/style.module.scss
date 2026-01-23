@@ -1,0 +1,18 @@
+.errorMessage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+  gap: 25px;
+}
+
+.message {
+  font-size: 58px;
+  font-weight: 700;
+}
+
+.homeButton {
+  padding: 15px 45px;
+  font-size: 20px;
+}

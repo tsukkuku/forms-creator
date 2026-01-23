@@ -3,7 +3,7 @@ import { doc, DocumentReference, getFirestore } from "firebase/firestore";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 import style from "./style.module.scss";
-import { Button } from "@/shared/ui";
+import { Button, ErrorMessage } from "@/shared/ui";
 import { ProtectedFormRoute } from "@/features/login";
 
 const UserAnswersPage = () => {
@@ -18,7 +18,11 @@ const UserAnswersPage = () => {
 
   if (loading) return <h1>Loading...</h1>;
   if (!userInfo)
-    return <h1>У этого пользователя не имеется ответов на данную форму</h1>;
+    return (
+      <ErrorMessage>
+        У этого пользователя не имеется ответов на данную форму
+      </ErrorMessage>
+    );
 
   return (
     <ProtectedFormRoute formID={id}>

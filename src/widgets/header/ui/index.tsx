@@ -10,7 +10,7 @@ export const Header = () => {
 
   return (
     <header className={style.header}>
-      <Link className={style.logo} to={user ? "/me" : "/"}>
+      <Link className={style.logo} to="/">
         <span>Forms</span>
         <span>Creator</span>
       </Link>

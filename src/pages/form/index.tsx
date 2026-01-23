@@ -8,6 +8,7 @@ import style from "./style.module.scss";
 import { useForms } from "@/shared/api";
 import { useEffect } from "react";
 import { FormPageSkeleton } from "@/widgets/form-skeletons";
+import { ErrorMessage } from "@/shared/ui";
 
 const FormPage = () => {
   const { id = "" } = useParams();
@@ -24,8 +25,11 @@ const FormPage = () => {
   }, []);
 
   if (loading) return <FormPageSkeleton />;
-  if (error) return <h2>Ошибка при загрузке формы {error.message}</h2>;
-  if (!data) return <h2>Такой формы не существует</h2>;
+  if (error)
+    return (
+      <ErrorMessage>Ошибка при загрузке формы {error.message}</ErrorMessage>
+    );
+  if (!data) return <ErrorMessage>Такой формы не существует</ErrorMessage>;
 
   return (
     <section className={style.formPage}>

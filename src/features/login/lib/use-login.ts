@@ -22,7 +22,26 @@ export const useLogin = () => {
       if (user.user) {
         navigate("/me");
       }
-    } catch (e) {}
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error("Неизвестная ошибка", error);
+      }
+    }
+  };
+
+  const loginOnFormPage = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error("Неизвестная ошибка", error);
+      }
+    }
   };
 
   const singOut = async () => {
@@ -38,5 +57,5 @@ export const useLogin = () => {
     return () => sub();
   }, []);
 
-  return { user, isLoading, handleLogin, singOut };
+  return { user, isLoading, loginOnFormPage, handleLogin, singOut };
 };

@@ -1,14 +1,14 @@
 import type { FormData } from "@/shared/model";
-import style from "./style.module.scss";
 import { useLogin } from "@/features/login";
 import { Button } from "@/shared/ui";
+import style from "./style.module.scss";
 
 interface FormInfoProps {
   form: FormData;
 }
 
 export const FormHeader = ({ form }: FormInfoProps) => {
-  const { user, handleLogin } = useLogin();
+  const { user, loginOnFormPage } = useLogin();
 
   return (
     <div
@@ -26,7 +26,7 @@ export const FormHeader = ({ form }: FormInfoProps) => {
             </div>
           </div>
         ) : (
-          <Button onClick={handleLogin} style={{ marginBottom: "5px" }}>
+          <Button onClick={loginOnFormPage} style={{ marginBottom: "5px" }}>
             Войти
           </Button>
         )}

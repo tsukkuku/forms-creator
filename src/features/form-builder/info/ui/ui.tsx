@@ -2,22 +2,23 @@ import { useForms } from "@/shared/api";
 import { useNavigate } from "react-router-dom";
 import type { FormData } from "@/shared/model";
 import { useForm } from "react-hook-form";
-import { Button, Input, Textarea } from "@/shared/ui";
+import { Input, Textarea } from "@/shared/ui";
 import toast from "react-hot-toast";
+import { FormColorPicker } from "./form-color-picker";
+import { ModalCopyLink } from "./modal-copy-link";
 import clsx from "clsx";
 import style from "./style.module.scss";
-import { FormColorPicker } from "./form-color-picker";
 
 interface FormDataTest {
   name: string;
   description: string;
 }
 
-interface FomrHeader {
+interface FormHeaderProps {
   data: FormData;
 }
 
-export const FormHeader = ({ data }: FomrHeader) => {
+export const FormHeader = ({ data }: FormHeaderProps) => {
   const {
     register,
     formState: { errors, isValid },
@@ -28,9 +29,13 @@ export const FormHeader = ({ data }: FomrHeader) => {
   const navigate = useNavigate();
 
   const handleSave = async (value: FormDataTest) => {
-    if (data.id) {
+    if (data.isPublic) {
       await updateForm(data.id, value);
       toast.success("Данные формы успешно обновлены!");
+      navigate("/me");
+    } else {
+      await updateForm(data.id, { isPublic: true, ...value });
+      toast.success("Форма успешно опубликована!");
       navigate("/me");
     }
   };
@@ -56,7 +61,6 @@ export const FormHeader = ({ data }: FomrHeader) => {
               message: "Описание может быть максимум 256 символов",
             },
           })}
-          maxLength={256}
           defaultValue={data?.description}
           className={style.changeDescription}
           error={errors.description?.message}
@@ -64,12 +68,13 @@ export const FormHeader = ({ data }: FomrHeader) => {
         />
       </div>
       <div className={style.buttonsGroup}>
-        <Button
-          onClick={handleSubmit((value) => handleSave(value))}
-          disabled={!isValid}
-        >
-          Сохранить
-        </Button>
+        <ModalCopyLink
+          formID={data.id}
+          isValid={isValid}
+          isPublic={data.isPublic}
+          handleSubmit={handleSubmit}
+          handleSave={handleSave}
+        />
         <FormColorPicker formID={data.id} initialColor={data?.color} />
       </div>
     </div>

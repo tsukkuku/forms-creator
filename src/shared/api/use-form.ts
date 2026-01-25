@@ -34,6 +34,7 @@ export const useForms = () => {
         id: formId,
         name: "Новая форма",
         description: "Описание",
+        isPublic: false,
         creator: user.displayName,
         creatorID: user.uid,
         color: "#4169E1",

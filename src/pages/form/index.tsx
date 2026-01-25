@@ -29,6 +29,8 @@ const FormPage = () => {
     return (
       <ErrorMessage>Ошибка при загрузке формы {error.message}</ErrorMessage>
     );
+  if (data && !data?.isPublic)
+    return <ErrorMessage>Форма еще не опубликована</ErrorMessage>;
   if (!data) return <ErrorMessage>Такой формы не существует</ErrorMessage>;
 
   return (

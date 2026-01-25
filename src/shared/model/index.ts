@@ -4,6 +4,7 @@ export interface FormData {
   id: string;
   name: string;
   description: string;
+  isPublic: boolean;
   createdAt: Timestamp;
   updateAt: Timestamp;
   creator: string;

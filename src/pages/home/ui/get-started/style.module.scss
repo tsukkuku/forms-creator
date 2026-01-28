@@ -12,6 +12,7 @@
   font-weight: 700;
   line-height: 50px;
   letter-spacing: -0.5px;
+  text-align: center;
 }
 
 .loginButtons {
@@ -30,4 +31,10 @@
 .secondButton {
   width: 350px;
   font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 30px;
+  }
 }

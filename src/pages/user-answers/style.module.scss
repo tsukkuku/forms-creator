@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   gap: 35px;
+  padding: 16px 16px 32px;
 }
 
 .pageHeader {
@@ -69,4 +70,58 @@
 
 .answer {
   font-size: 16px;
+  word-break: break-all;
+}
+
+@media (max-width: 900px) {
+  .userAnswersPage {
+    padding: 12px 12px 24px;
+    gap: 28px;
+  }
+
+  .username {
+    font-size: 20px;
+  }
+
+  .questionName {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .userAnswersPage {
+    padding: 10px 10px 20px;
+    gap: 24px;
+  }
+
+  .pageHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .userInfo {
+    gap: 10px;
+  }
+
+  .userAvatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .username {
+    font-size: 18px;
+  }
+
+  .answerList {
+    gap: 20px;
+  }
+
+  .questionName {
+    font-size: 18px;
+  }
+
+  .answer {
+    font-size: 15px;
+  }
 }

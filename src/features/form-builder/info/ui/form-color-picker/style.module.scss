@@ -58,3 +58,30 @@
   border: 1px solid var(--input-border);
   border-radius: 4px;
 }
+
+@media (max-width: 900px) {
+  .colorList {
+    grid-template-columns: repeat(3, minmax(50px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .openModalBtn {
+    padding: 8px 12px;
+  }
+
+  .colorList {
+    grid-template-columns: repeat(2, minmax(60px, 1fr));
+    gap: 12px;
+  }
+
+  .selectColor {
+    width: 25px;
+    height: 25px;
+  }
+
+  .colorName {
+    font-size: 13px;
+  }
+}

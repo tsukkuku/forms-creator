@@ -4,3 +4,23 @@
   place-items: center;
   gap: 20px;
 }
+
+@media (max-width: 1400px) {
+  .formList {
+    grid-template-columns: repeat(3, minmax(340px, 1fr));
+  }
+}
+
+@media (max-width: 1050px) {
+  .formList {
+    grid-template-columns: repeat(2, minmax(340px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 695px) {
+  .formList {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

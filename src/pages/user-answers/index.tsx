@@ -51,7 +51,7 @@ const UserAnswersPage = () => {
                   {answer.questionDescription}
                 </div>
               </div>
-              {typeof answer.value === "string" ? (
+              {answer.value ? typeof answer.value === "string" ? (
                 <div className={style.answer}>{answer.value}</div>
               ) : (
                 answer.value.map((item, index) => (
@@ -59,7 +59,7 @@ const UserAnswersPage = () => {
                     {index + 1}. {item}
                   </div>
                 ))
-              )}
+              ) : <div>Нет ответа</div>}
             </div>
           ))}
         </div>

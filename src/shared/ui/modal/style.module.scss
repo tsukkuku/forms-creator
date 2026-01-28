@@ -59,3 +59,10 @@
   align-items: center;
   flex-direction: column;
 }
+
+
+@media (max-width: 625px) {
+    .modalContent {
+      margin-inline: 15px;
+    }
+}

@@ -29,7 +29,7 @@ export const QuestionChangeType = ({
       <div className={style.dropDownBtn} onClick={handleClose}>
         Тип вопроса
       </div>
-      <Dropdown isOpen={isOpen} onClose={handleClose}>
+      <Dropdown isOpen={isOpen} onClose={handleClose} right={15} top={15}>
         <Dropdown.Item
           onClose={handleClose}
           onClick={() => changeQuestionType("one")}

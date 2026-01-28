@@ -1,8 +1,8 @@
 .formHeader {
-  max-width: 1000px;
   width: 100%;
+  max-width: 1400px;
   border: 1px solid var(--input-border);
-  padding: 15px;
+  padding: 16px 20px;
   border-radius: 8px;
 }
 
@@ -36,4 +36,42 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 900px) {
+  .formHeader {
+    padding: 14px 16px;
+  }
+
+  .changeTitleInput {
+    font-size: 24px;
+  }
+
+  .changeDescription {
+    font-size: 16px;
+  }
+
+  .buttonsGroup {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .formHeader {
+    padding: 12px;
+  }
+
+  .changeTitleInput {
+    font-size: 20px;
+  }
+
+  .changeDescription {
+    font-size: 14px;
+  }
+
+  .buttonsGroup {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

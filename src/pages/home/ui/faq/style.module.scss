@@ -25,3 +25,17 @@
     letter-spacing: -0.5px;
   }
 }
+
+@media (max-width: 495px) {
+  .faqTitle {
+    .title {
+      text-align: center;
+      font-size: 32px;
+    }
+
+    .secondTitle {
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+}

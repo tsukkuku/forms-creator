@@ -6,4 +6,12 @@
   justify-content: center;
   align-items: center;
   gap: 40px;
+  padding: 16px;
+}
+
+@media (max-width: 600px) {
+  .formPageSkeleton {
+    gap: 24px;
+    padding: 12px 10px;
+  }
 }

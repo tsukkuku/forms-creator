@@ -4,11 +4,11 @@ import { useDocumentData } from "react-firebase-hooks/firestore";
 import { doc, DocumentReference, getFirestore } from "firebase/firestore";
 import type { FormData } from "@/shared/model";
 import { FormQuestionList } from "@/widgets/form-questions";
-import style from "./style.module.scss";
 import { useForms } from "@/shared/api";
 import { useEffect } from "react";
 import { FormPageSkeleton } from "@/widgets/form-skeletons";
 import { ErrorMessage } from "@/shared/ui";
+import style from "./style.module.scss";
 
 const FormPage = () => {
   const { id = "" } = useParams();

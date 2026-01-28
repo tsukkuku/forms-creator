@@ -5,14 +5,44 @@
   align-items: center;
   min-height: 75vh;
   gap: 25px;
+  padding: 16px;
+  text-align: center;
 }
 
 .message {
-  font-size: 58px;
+  font-size: 48px;
   font-weight: 700;
 }
 
 .homeButton {
   padding: 15px 45px;
   font-size: 20px;
+}
+
+@media (max-width: 900px) {
+  .message {
+    font-size: 36px;
+  }
+
+  .homeButton {
+    padding: 12px 36px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .errorMessage {
+    padding: 12px;
+    gap: 20px;
+  }
+
+  .message {
+    font-size: 28px;
+  }
+
+  .homeButton {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
 }

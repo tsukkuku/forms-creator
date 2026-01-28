@@ -2,7 +2,7 @@ import { Faq, GetStarted, Info } from "./ui";
 
 const Home = () => {
   return (
-    <div style={{ maxWidth: "1440px" }}>
+    <div style={{ maxWidth: "1440px", paddingInline: '15px' }}>
       <Info />
       <Faq />
       <GetStarted />

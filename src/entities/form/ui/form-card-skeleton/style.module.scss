@@ -1,5 +1,6 @@
 .formInfoSkeleton {
-  width: 340px;
+  width: 100%;
+  max-width: 340px;
   height: 115px;
   border: 1px solid var(--accordion-border);
   border-top: 10px solid var(--accordion-border);

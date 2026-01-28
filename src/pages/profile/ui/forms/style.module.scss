@@ -1,16 +1,19 @@
 .userProfile {
-  width: 1440px;
+  width: 100%;
+  max-width: 1440px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 35px;
+  padding: 0 16px 32px;
 }
 
 .myForms {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .loading {
@@ -23,4 +26,37 @@
 .notFoundMsg {
   font-size: 24px;
   font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 1400px) {
+  .loading {
+    grid-template-columns: repeat(3, minmax(340px, 1fr));
+  }
+}
+
+@media (max-width: 1050px) {
+  .userProfile {
+    padding: 0 12px 24px;
+    gap: 24px;
+  }
+
+  .loading {
+    grid-template-columns: repeat(2, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+}
+
+@media (max-width: 695px) {
+  .userProfile {
+    padding: 0 10px 20px;
+    gap: 20px;
+  }
+
+  .loading {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
 }

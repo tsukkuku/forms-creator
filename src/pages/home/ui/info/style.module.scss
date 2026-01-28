@@ -45,3 +45,27 @@
     font-size: 18px;
   }
 }
+
+@media (max-width: 768px) {
+  .infoSection {
+    flex-direction: column;
+  }
+
+  .titleContainer {
+    .title {
+      font-size: 38px;
+    }
+
+    .secondTitle {
+      font-size: 18px;
+    }
+  }
+
+  .navigationButtons {
+    flex-direction: column;
+    .loginButton,
+    .createButton {
+      width: 100%;
+    }
+  }
+}

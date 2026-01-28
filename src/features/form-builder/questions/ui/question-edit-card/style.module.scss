@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: start;
+  gap: 16px;
 }
 
 .questionInfo {
@@ -65,4 +66,37 @@
 
 .changeType {
   margin-left: auto;
+}
+
+@media (max-width: 900px) {
+  .questionCard {
+    flex-direction: column;
+  }
+
+  .questionHeader {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .editQuestion {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .descriptionInput {
+    width: 100%;
+  }
+
+  .addOptionBtn {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .questionCard {
+    padding: 12px;
+    gap: 12px;
+  }
 }

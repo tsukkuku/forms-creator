@@ -5,11 +5,13 @@
   flex-direction: column;
   align-items: center;
   gap: 35px;
+  padding: 16px 16px 32px;
 }
 
 .formName {
   font-size: 24px;
   font-weight: 700;
+  text-align: center;
 }
 
 .userList {
@@ -52,4 +54,18 @@
 
 .linkBtn {
   padding: 8px 20px;
+}
+
+@media (max-width: 900px) {
+  .answersPage {
+    padding: 12px 12px 24px;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .answersPage {
+    padding: 10px 10px 20px;
+    gap: 24px;
+  }
 }

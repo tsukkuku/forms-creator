@@ -17,7 +17,34 @@
 }
 
 .sendBtn {
-  width: 250px !important;
-  width: 100%;
+  max-width: 250px;
   margin-bottom: 35px;
+}
+
+@media (max-width: 900px) {
+  .buttonGroups {
+    gap: 16px;
+  }
+
+  .sendBtn {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .formQuestionList {
+    margin-top: 24px;
+    gap: 12px;
+  }
+
+  .buttonGroups {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sendBtn {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }

@@ -30,6 +30,7 @@ const EditFormPage = () => {
 
   return (
     <ProtectedFormRoute formID={id!}>
+      <title>{data.name}</title>
       <section className={style.editFormPage}>
         <FormHeader data={data} />
         <QuestionsList data={data} />

@@ -27,6 +27,7 @@ const UserAnswersPage = () => {
   return (
     <ProtectedFormRoute formID={id}>
       <div className={style.userAnswersPage}>
+        <title>Ответы</title>
         <div className={style.pageHeader}>
           <div className={style.userInfo}>
             <div className={style.userAvatar}>
@@ -51,15 +52,19 @@ const UserAnswersPage = () => {
                   {answer.questionDescription}
                 </div>
               </div>
-              {answer.value ? typeof answer.value === "string" ? (
-                <div className={style.answer}>{answer.value}</div>
+              {answer.value ? (
+                typeof answer.value === "string" ? (
+                  <div className={style.answer}>{answer.value}</div>
+                ) : (
+                  answer.value.map((item, index) => (
+                    <div key={index} className={style.answer}>
+                      {index + 1}. {item}
+                    </div>
+                  ))
+                )
               ) : (
-                answer.value.map((item, index) => (
-                  <div key={index} className={style.answer}>
-                    {index + 1}. {item}
-                  </div>
-                ))
-              ) : <div>Нет ответа</div>}
+                <div>Нет ответа</div>
+              )}
             </div>
           ))}
         </div>

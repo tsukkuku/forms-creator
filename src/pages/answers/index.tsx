@@ -19,6 +19,7 @@ const AnswersPage = () => {
   return (
     <ProtectedFormRoute formID={id}>
       <div className={style.answersPage}>
+        <title>{data.name}</title>
         <div className={style.formName}>{data.name}</div>
         <div className={style.userList}>
           {data.answers.map((answer) => (

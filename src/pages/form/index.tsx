@@ -35,6 +35,7 @@ const FormPage = () => {
 
   return (
     <section className={style.formPage}>
+      <title>{data.name}</title>
       <FormHeader form={data} />
       <FormQuestionList
         questions={data.questions}

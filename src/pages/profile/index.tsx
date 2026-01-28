@@ -4,6 +4,7 @@ import { ProtectedRoute } from "@/features/login";
 const Profile = () => {
   return (
     <ProtectedRoute>
+      <title>Профиль</title>
       <Forms />
     </ProtectedRoute>
   );

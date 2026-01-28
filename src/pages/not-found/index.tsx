@@ -7,6 +7,7 @@ const NotFoundPage = () => {
 
   return (
     <div className={style.notFoundPage}>
+      <title>404</title>
       <div className={style.text}>404</div>
       <div className={style.title}>Страница не найдена</div>
       <div className={style.paragraph}>

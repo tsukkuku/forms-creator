@@ -1,73 +1,89 @@
-# React + TypeScript + Vite
+# FormsCreator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### [Ссылка](https://forms-creator.netlify.app/)
 
-Currently, two official plugins are available:
+## Обзор
+Интерактивный конструктор форм/тестов на React: позволяет создавать опросы и тесты, настраивать вопросы и внешний вид, публиковать формы и собирать ответы пользователей в реальном времени.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Технологический стек
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
+![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?style=for-the-badge&logo=reacthookform&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-593d88?style=for-the-badge&logo=redux&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black)
+![Vitest](https://img.shields.io/badge/-Vitest-252529?style=for-the-badge&logo=vitest&logoColor=FCC72B)
+![Testing-Library](https://img.shields.io/badge/-TestingLibrary-%23E33332?style=for-the-badge&logo=testing-library&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 
-## React Compiler
+## Функционал
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* 🧩 Конструктор форм  
+  * Создание и редактирование форм (название, описание, цветовая схема).  
+  * Добавление вопросов разных типов и вариантов ответов.  
+  * Управление опциями вопросов (добавление/удаление/редактирование).  
+* 📄 Страница прохождения формы
+* 📊 Сбор и просмотр ответов пользователей
+* 👤 Управление формами через личный кабинет 
+* 🔐 Авторизация через Google
+* 🌙 Переключение темы (светлая/тёмная)
+* 📱 Адаптивный интерфейс
 
-## Expanding the ESLint configuration
+## Скриншоты
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+<img width="1919" height="482" alt="image" src="https://github.com/user-attachments/assets/b34e0a24-23e5-43c1-a15c-4c6054c8590a" />
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+***Профиль***
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+<img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/7888cf14-6766-447a-a0ce-6af4035848f0" />
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+***Страница редактирования формы***
+
+<img width="1919" height="906" alt="image" src="https://github.com/user-attachments/assets/fae74042-3701-4eb0-be39-a18ea2dd5a54" />
+
+***Страница ответа на форму***
+
+<img width="1914" height="340" alt="image" src="https://github.com/user-attachments/assets/c39a0a10-b202-430c-bb0b-8fa84109f839" />
+
+<img width="1061" height="309" alt="image" src="https://github.com/user-attachments/assets/d59cf737-17a1-453d-97e8-18d8982410da" />
+
+***Страница ответов пользователей***
+
+
+## Установка
+
+1. Скачать исходный код
+```bash
+git clone https://github.com/tsukkuku/forms-creator
+cd forms-creator
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Установите зависимости
+```bash
+npm install
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3. Создайте .env файл и вставьте туда свой API ключ Firebase
+```bash
+VITE_FIREBASE_KEY=FIREBASE_KEY
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Запуск
+
+1. Запуск на локальном сервере
+```bash
+npm run dev
+```
+
+2. Сборка
+```bash
+npm run build
+```
+
+**Собранные файлы будут в папке dist/**
+
+3. Просмотр собранного проекта
+```bash
+npm run preview
 ```
